@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réservation{% endblock %}
+
+{% block body %}
+
+    <div class="container py-4">
+        <div class="row">
+            <div class="col-4">
+                <div class="border border-danger bg-orange-lighter py-2 px-3">
+                    <h2 class="text-danger text-center">{{ resto['name'] }}</h2>
+                </div>
+                <div class="d-flex my-3">
+                    {% for tag in resto['tags'] %}
+                        <button class="btn btn-success me-2">{{ tag }}</button>
+                    {% endfor %}
+                </div>
+                <p> Lorem ipsum dolor sit amet. Sit esse obcaecati qui magni atque perferendis recusandae nam omnis
+                    culpa. Ad omnis illo et assumenda enim eum fuga modi eum praesentium nemo est corrupti facilis eos
+                    quibusdam quidem. In expedita veniam et explicabo esse et nostrum fuga est blanditiis nesciunt et
+                    magni nisi.
+                </p>
+                <div class="d-flex">
+                    <i class="fas fa-map-marker-alt text-danger mt-1"></i>
+                    <p class="ms-2">{{ resto['adresse'] }}</p>
+                    <a href="#" class="text-success ms-3">VOIR LE PLAN</a>
+                </div>
+                <p>
+                    <i class="fas fa-phone-alt text-danger me-2"></i>
+                    {{ resto['telephone'] }}
+                </p>
+                <div class="d-grid gap-2">
+                    <a href="{{path('reservations')}}" class="btn btn-success">VOIR LA CARTE</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

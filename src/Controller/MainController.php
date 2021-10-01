@@ -52,4 +52,27 @@ class MainController extends AbstractController
         return $this->render('main/mentions-legales.html.twig');
     }
 
+
+    /**
+     * @Route("/reservations", name="reservations")
+     */
+    public function reservations()
+    {
+        $resto =[
+            'name' => 'Pataterie',
+            'slug' => 'pataterie',
+            'adresse' => '118 boulevard cote blatin 69000 Lyon',
+            'telephone' => '06.64.62.65.68',
+            'prix' => '€€€',
+            'image' => 'https://mvistatic.com/photosmvi/2021/09/08/P28031610D4812296G.jpg',
+            'tags' => [
+                'Micro-onde', 'Patates', 'Fromage',
+            ]
+        ];
+        // Nous générons la vue de la page des réservations
+        return $this->render('main/reservation.html.twig',[
+            'resto'=> $resto
+        ]);
+    }
+
 }
