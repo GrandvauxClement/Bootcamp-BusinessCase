@@ -1,0 +1,20 @@
+<div class="card">
+    <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+        <img
+                src="{{ resto['image'] }}"
+        />
+        <a href="#">
+            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+        </a>
+    </div>
+    <div class="card-body">
+        <h4 class="card-title text-black font-weight-bold">{{ resto['name'] }}</h4>
+        <p><i class="fas fa-concierge-bell"></i> {{ resto['tags'][0] }}</p>
+        <p class="card-text">
+            <small>{{ resto['adresse']}} </small>
+        </p>
+        <div class="d-grid gap-2">
+            <a href="#" class="btn btn-success">RÉSERVEZ</a>
+        </div>
+    </div>
+</div>

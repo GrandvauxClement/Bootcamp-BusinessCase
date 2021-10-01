@@ -1,3 +1,8 @@
 /*@import "~bootstrap";*/
+$theme-colors: (
+        "success": #025402,
+        "danger": #FF7E09,
+        "light": #F2F6F4
+);
 
-@import "~mdb-ui-kit/css/mdb.min.css";
+@import "~mdb-ui-kit/src/scss/mdb.free.scss";
