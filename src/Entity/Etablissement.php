@@ -99,6 +99,26 @@ class Etablissement
      */
     private $reservations;
 
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $note;
+
+    /**
+     * @ORM\Column(type="string", length=20)
+     */
+    private $numTelephone;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $slugFolderImage;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $slug_menu;
+
     public function __construct()
     {
         $this->imagesRestaurants = new ArrayCollection();
@@ -363,6 +383,54 @@ class Etablissement
                 $reservation->setIdEtablissement(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getNote(): ?float
+    {
+        return $this->note;
+    }
+
+    public function setNote(float $note): self
+    {
+        $this->note = $note;
+
+        return $this;
+    }
+
+    public function getNumTelephone(): ?string
+    {
+        return $this->numTelephone;
+    }
+
+    public function setNumTelephone(string $numTelephone): self
+    {
+        $this->numTelephone = $numTelephone;
+
+        return $this;
+    }
+
+    public function getSlugFolderImage(): ?string
+    {
+        return $this->slugFolderImage;
+    }
+
+    public function setSlugFolderImage(string $slugFolderImage): self
+    {
+        $this->slugFolderImage = $slugFolderImage;
+
+        return $this;
+    }
+
+    public function getSlugMenu(): ?string
+    {
+        return $this->slug_menu;
+    }
+
+    public function setSlugMenu(?string $slug_menu): self
+    {
+        $this->slug_menu = $slug_menu;
 
         return $this;
     }
