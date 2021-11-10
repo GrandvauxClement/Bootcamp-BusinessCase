@@ -564,7 +564,7 @@ class AppFixtures extends Fixture
         $manager->persist($ptitCatsel);
         // J'ajoute les images
 
-        $ptitCatselArrayImages = ['ptitCatsel/1.jpg', 'ptitCatsel/2.jpg', 'ptitCatsel/3.jpg', 'ptitCatsel/4.jpg'];
+        $ptitCatselArrayImages = ['ptitCastel/1.jpg', 'ptitCastel/2.jpg', 'ptitCastel/3.jpg', 'ptitCastel/4.jpg'];
         foreach ($ptitCatselArrayImages as $imageUrl){
             $imageForBdd = new ImagesRestaurants();
             $imageForBdd->setUrl($imageUrl);

@@ -1,20 +1,31 @@
 <div class="card">
     <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
         <img
-                src="{{ resto['image'] }}"
+                src="{{'images/restaurants/'~ resto.imagesRestaurants[0].url }}"
         />
         <a href="#">
             <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
         </a>
     </div>
     <div class="card-body">
-        <h4 class="card-title text-black font-weight-bold">{{ resto['name'] }}</h4>
-        <p><i class="fas fa-concierge-bell"></i> {{ resto['tags'][0] }}</p>
+        <h4 class="card-title text-black font-weight-bold">{{ resto.nom }}</h4>
+        <p>
+            {% for i in 1..5 %}
+                {% if i <= resto.note %}
+                    <i class="fas fa-star text-danger"></i>
+                {% elseif (resto.note - i) < -0.25 and (resto.note - i) > -0.75 %}
+                    <i class="fas fa-star-half-alt text-danger"></i>
+                {% else %}
+                    <i class="far fa-star text-danger"></i>
+                {% endif %}
+            {% endfor %}
+        </p>
+        <p><i class="fas fa-concierge-bell"></i> {{ resto.idTypeCuisine.nom }}</p>
         <p class="card-text">
-            <small>{{ resto['adresse']}} </small>
+            <small>{{ resto.rue }} {{ resto.codePostal }} {{ resto.ville }}  </small>
         </p>
         <div class="d-grid gap-2">
-            <a href="{{path('reservations')}}" class="btn btn-success">RÉSERVEZ</a>
+            <a href="{{path('reservations', {id: resto.id})}}" class="btn btn-success">RÉSERVEZ</a>
         </div>
     </div>
 </div>

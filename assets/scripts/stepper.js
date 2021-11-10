@@ -12,28 +12,28 @@ $(function(){
         },
         onStepChanging: function (event, currentIndex, newIndex) {
             if ( newIndex >= 1 ) {
-                $('.steps ul li:first-child a img').attr('src','images/stepperImages/step-1.png');
+                $('.steps ul li:first-child a img').attr('src','../../images/stepperImages/step-1.png');
             } else {
-                $('.steps ul li:first-child a img').attr('src','images/stepperImages/step-calendar-active.png');
+                $('.steps ul li:first-child a img').attr('src','../../images/stepperImages/step-calendar-active.png');
             }
 
             if ( newIndex === 1 ) {
-                $('.steps ul li:nth-child(2) a img').attr('src','images/stepperImages/step-horloge-active.png');
+                $('.steps ul li:nth-child(2) a img').attr('src','../../images/stepperImages/step-horloge-active.png');
             } else {
-                $('.steps ul li:nth-child(2) a img').attr('src','images/stepperImages/step-2.png');
+                $('.steps ul li:nth-child(2) a img').attr('src','../../images/stepperImages/step-2.png');
             }
 
             if ( newIndex === 2 ) {
-                $('.steps ul li:nth-child(3) a img').attr('src','images/stepperImages/step-personne-active.png');
+                $('.steps ul li:nth-child(3) a img').attr('src','../../images/stepperImages/step-personne-active.png');
             } else {
-                $('.steps ul li:nth-child(3) a img').attr('src','images/stepperImages/step-3.png');
+                $('.steps ul li:nth-child(3) a img').attr('src','../../images/stepperImages/step-3.png');
             }
 
             if ( newIndex === 3 ) {
-                $('.steps ul li:nth-child(4) a img').attr('src','images/stepperImages/step-done-active.png');
+                $('.steps ul li:nth-child(4) a img').attr('src','../../images/stepperImages/step-done-active.png');
                 $('.actions ul').addClass('step-4');
             } else {
-                $('.steps ul li:nth-child(4) a img').attr('src','images/stepperImages/step-4.png');
+                $('.steps ul li:nth-child(4) a img').attr('src','../../images/stepperImages/step-4.png');
                 $('.actions ul').removeClass('step-4');
             }
             return true;
@@ -55,10 +55,10 @@ $(function(){
         }
     })
     // Create Steps Image
-    $('.steps ul li:first-child').append('<img src="images/stepperImages/step-arrow.png" alt="" class="step-arrow">').find('a').append('<img src="images/stepperImages/step-calendar-active.png" alt=""> ').append('<span class="step-order d-none d-md-block">Sélectionnez une date</span>');
-    $('.steps ul li:nth-child(2)').append('<img src="images/stepperImages/step-arrow.png" alt="" class="step-arrow">').find('a').append('<img src="images/stepperImages/step-2.png" alt="">').append('<span class="step-order d-none d-md-block">Horraire disponible</span>');
-    $('.steps ul li:nth-child(3)').append('<img src="images/stepperImages/step-arrow.png" alt="" class="step-arrow">').find('a').append('<img src="images/stepperImages/step-3.png" alt="">').append('<span class="step-order d-none d-md-block">Nombre de personnes</span>');
-    $('.steps ul li:last-child a').append('<img src="images/stepperImages/step-4.png" alt="">').append('<span class="step-order d-none d-md-block">Information complémentaires</span>');
+    $('.steps ul li:first-child').append('<img src="../../images/stepperImages/step-arrow.png" alt="" class="step-arrow">').find('a').append('<img src="../../images/stepperImages/step-calendar-active.png" alt=""> ').append('<span class="step-order d-none d-md-block">Sélectionnez une date</span>');
+    $('.steps ul li:nth-child(2)').append('<img src="../../images/stepperImages/step-arrow.png" alt="" class="step-arrow">').find('a').append('<img src="../../images/stepperImages/step-2.png" alt="">').append('<span class="step-order d-none d-md-block">Horraire disponible</span>');
+    $('.steps ul li:nth-child(3)').append('<img src="../../images/stepperImages/step-arrow.png" alt="" class="step-arrow">').find('a').append('<img src="../../images/stepperImages/step-3.png" alt="">').append('<span class="step-order d-none d-md-block">Nombre de personnes</span>');
+    $('.steps ul li:last-child a').append('<img src="../../images/stepperImages/step-4.png" alt="">').append('<span class="step-order d-none d-md-block">Information complémentaires</span>');
     // Count input
     $(".quantity span").on("click", function() {
 
