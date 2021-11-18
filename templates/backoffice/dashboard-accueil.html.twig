@@ -1,0 +1,17 @@
+{% extends '@!EasyAdmin/layout.html.twig' %}
+{% block content %}
+    <div class="container">
+        <h1 class="text-danger text-center"> Bienvenue sur votre Back-office ! :)</h1>
+        <h5>Page d'acceuil à faire avec plein de beau graph ou juste mettre un des crud par défault ! ^^</h5>
+        <div class="row mt-3">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Mes Etablissements</h5>
+                    <p class="card-text">Il y a <span class="h5">{{ restos}}</span> restaurants actif sur votre application</p>
+                    <a href="#" class="btn btn-primary">Voir mes Restaurants</a>
+                    <a href="#" class="btn btn-primary">Ajouter un nouveau Restaurants</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
