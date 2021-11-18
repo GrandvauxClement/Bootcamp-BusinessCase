@@ -6,6 +6,7 @@ use App\Repository\EtablissementRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 /**
  * @ORM\Entity(repositoryClass=EtablissementRepository::class)
@@ -119,6 +120,7 @@ class Etablissement
      */
     private $slug_menu;
 
+
     public function __construct()
     {
         $this->imagesRestaurants = new ArrayCollection();
@@ -140,6 +142,18 @@ class Etablissement
     public function setNom(string $nom): self
     {
         $this->nom = $nom;
+        if (empty($this->slugFolderImage)){
+            $slugFolder = '';
+            $arrayNameWithoutSpace = explode(' ', $this->nom);
+            foreach ($arrayNameWithoutSpace as $word){
+                $slugFolder .= ucfirst($word);
+            }
+            $this->slugFolderImage = $slugFolder;
+            if (!is_dir('..\\public\\images\\restaurants\\'.$this->slugFolderImage)){
+                mkdir('..\\public\\images\\restaurants\\'.$this->slugFolderImage);
+            }
+
+        }
 
         return $this;
     }
@@ -431,6 +445,11 @@ class Etablissement
     public function setSlugMenu(?string $slug_menu): self
     {
         $this->slug_menu = $slug_menu;
+       /* if (!file_exists('..\\public\\images\\restaurants\\'.$this->slugFolderImage.'\\'.$this->slug_menu)){
+            rename('..\\public\\images\\restaurants\\'.$this->slug_menu, '..\\..\\public\\images\\restaurants\\'.$this->slugFolderImage.'\\'.$this->slug_menu);
+        } else{
+            die(dump('je passe ici'));
+        }*/
 
         return $this;
     }
