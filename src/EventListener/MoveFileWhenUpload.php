@@ -12,7 +12,7 @@ class MoveFileWhenUpload implements EventSubscriberInterface {
     {
         return [
             Events::postPersist,
-            Events::postUpdate
+
         ];
     }
 
