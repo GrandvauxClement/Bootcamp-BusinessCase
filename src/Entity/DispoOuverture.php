@@ -108,4 +108,17 @@ class DispoOuverture
 
         return $this;
     }
+    public function __toString()
+    {
+        if ($this->service_midi && $this->service_soir){
+            return $this->nomJour.' Service midi et soir';
+        }elseif ($this->service_midi && !$this->service_soir){
+            return $this->nomJour.' Service uniquement le midi';
+        }elseif (!$this->service_midi && $this->service_soir){
+            return $this->nomJour.' Service uniquement le soir';
+        }else {
+            return $this->nomJour.' Aucun service';
+        }
+
+    }
 }

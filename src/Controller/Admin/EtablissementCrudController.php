@@ -2,7 +2,10 @@
 
 namespace App\Controller\Admin;
 
+use App\Controller\Admin\Fields\MultipleImageField;
 use App\Entity\Etablissement;
+use App\Entity\ImagesRestaurants;
+use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
@@ -53,10 +56,65 @@ class EtablissementCrudController extends AbstractCrudController
                 ->setUploadedFileNamePattern('[randomhash].[extension]')
                 ->setRequired(false)
                 ->hideOnIndex(),
+
 //            SlugField::new('slugFolderImage', 'Nom du dossier où les images sont dl'),
         //    ImageField::new('slug_menu', 'Nom du menu')
-
+            AssociationField::new('dispoOuvertures', 'Definir vos périodes d\'ouverture')->hideOnIndex(),
+            MultipleImageField::new('imageFile')
+                ->setRequired(false)
+                ->onlyOnForms(),
         ];
+    }
+
+    public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    {
+        if ($entityInstance instanceof Etablissement){
+
+
+        $resto = new Etablissement();
+        $resto->setNom($entityInstance->getNom());
+        $resto->setRue($entityInstance->getRue());
+        $resto->setVille($entityInstance->getVille());
+        $resto->setCodePostal($entityInstance->getCodePostal());
+        $resto->setAccepteReservation($entityInstance->getAccepteReservation());
+        $resto->setDescription($entityInstance->getDescription());
+        $resto->setNote($entityInstance->getNote());
+        $resto->setNbrePlaceTotal($entityInstance->getNbrePlaceTotal());
+        $resto->setServiceMidiDebutTime($entityInstance->getServiceMidiDebutTime());
+        $resto->setServiceMidiFinTime($entityInstance->getServiceMidiFinTime());
+        $resto->setServiceSoirDebutTime($entityInstance->getServiceSoirDebutTime());
+        $resto->setServiceSoirFinTime($entityInstance->getServiceSoirFinTime());
+        $resto->setIdTypeCuisine($entityInstance->getIdTypeCuisine());
+        foreach ($entityInstance->getTags() as $tag){
+            $resto->addTag($tag);
+        }
+
+        $resto->setNumTelephone($entityInstance->getNumTelephone());
+        $resto->setSlugMenu($entityInstance->getSlugMenu());
+
+        if (!file_exists($this->getParameter('kernel.project_dir').'\\public\\images\\restaurants\\'.$entityInstance->getSlugFolderImage().'\\'.$entityInstance->getSlugMenu())){
+            if (!is_dir($this->getParameter('kernel.project_dir').'\\public\\images\\restaurants\\'.$entityInstance->getSlugFolderImage())){
+                mkdir($this->getParameter('kernel.project_dir').'\\public\\images\\restaurants\\'.$entityInstance->getSlugFolderImage());
+            }
+            rename($this->getParameter('kernel.project_dir').'\\public\\images\\restaurants\\'.$entityInstance->getSlugMenu(), $this->getParameter('kernel.project_dir').'\\public\\images\\restaurants\\'.$entityInstance->getSlugFolderImage().'\\'.$entityInstance->getSlugMenu());
+        }
+        // Les jour d'ouverture -> dispo
+        foreach ($entityInstance->getDispoOuvertures() as $jourDispo){
+            $resto->addDispoOuverture($jourDispo);
+        }
+
+            $entityManager->persist($resto);
+        // J'ajoute les images
+
+        foreach ($entityInstance->getImageFile() as $imageUrl){
+            $imageForBdd = new ImagesRestaurants();
+            $imageUrl->move('images/restaurants/'.$resto->getSlugFolderImage(), uniqid().''.$imageUrl->getClientOriginalName());
+            $imageForBdd->setUrl( uniqid().''.$imageUrl->getClientOriginalName());
+            $imageForBdd->setIdEtablissement($resto);
+            $entityManager->persist($imageForBdd);
+        }
+        $entityManager->flush();
+        }
     }
 
 }
