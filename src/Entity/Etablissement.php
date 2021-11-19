@@ -120,6 +120,8 @@ class Etablissement
      */
     private $slug_menu;
 
+    private $imageFile;
+
 
     public function __construct()
     {
@@ -149,10 +151,6 @@ class Etablissement
                 $slugFolder .= ucfirst($word);
             }
             $this->slugFolderImage = $slugFolder;
-            if (!is_dir('..\\public\\images\\restaurants\\'.$this->slugFolderImage)){
-                mkdir('..\\public\\images\\restaurants\\'.$this->slugFolderImage);
-            }
-
         }
 
         return $this;
@@ -445,12 +443,22 @@ class Etablissement
     public function setSlugMenu(?string $slug_menu): self
     {
         $this->slug_menu = $slug_menu;
-       /* if (!file_exists('..\\public\\images\\restaurants\\'.$this->slugFolderImage.'\\'.$this->slug_menu)){
-            rename('..\\public\\images\\restaurants\\'.$this->slug_menu, '..\\..\\public\\images\\restaurants\\'.$this->slugFolderImage.'\\'.$this->slug_menu);
-        } else{
-            die(dump('je passe ici'));
-        }*/
-
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @param mixed $imageFile
+     */
+    public function setImageFile($imageFile): void
+    {
+        $this->imageFile = $imageFile;
     }
 }
