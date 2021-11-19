@@ -29,7 +29,7 @@
                     <a href="tel:+33625354587">{{ resto.numTelephone }}</a>
                 </p>
                 <div class="d-grid gap-2">
-                    <a href="{{asset( 'images/restaurants/'~resto.slugMenu) }}" class="btn btn-success" target="_blank">VOIR LE MENU</a>
+                    <a href="{{asset( 'images/restaurants/'~resto.slugFolderImage~'/'~resto.slugMenu) }}" class="btn btn-success" target="_blank">VOIR LE MENU</a>
                 </div>
             </div>
 
@@ -69,7 +69,7 @@
                                 <div class="carousel-item">
                             {% endif %}
                             <img
-                                    src=" {{asset('images/restaurants/'~ image.url) }}"
+                                    src=" {{asset('images/restaurants/'~resto.slugFolderImage~'/'~ image.url) }}"
                                     class="d-block w-100"
                                     alt="..."
                             />

@@ -368,7 +368,7 @@ class AppFixtures extends Fixture
         $leMadras->addTag($tagHalal);
         $leMadras->setNumTelephone('+33 4 73 29 61 67');
         $leMadras->setSlugFolderImage('le_madras');
-        $leMadras->setSlugMenu('le_madras/menu.jpg');
+        $leMadras->setSlugMenu('menu.jpg');
         // Les jour d'ouverture -> dispo
         $leMadrasArrayDispo = [$lundiServiceSoir, $mardiFullService, $mercrediFullService, $jeudiFullService, $vendrediFullService, $samediFullService, $dimancheFullService];
         foreach ($leMadrasArrayDispo as $jourDispo){
@@ -378,7 +378,7 @@ class AppFixtures extends Fixture
         $manager->persist($leMadras);
         // J'ajoute les images
 
-        $lemadrasArrayImages = ['le_madras/le-madras.jpg', 'le_madras/le-madras-2.jpg', 'le_madras/le-madras-3.jpg', 'le_madras/le-madras-4.jpg'];
+        $lemadrasArrayImages = ['le-madras.jpg', 'le-madras-2.jpg', 'le-madras-3.jpg', 'le-madras-4.jpg'];
         foreach ($lemadrasArrayImages as $imageUrl){
             $imageForBdd = new ImagesRestaurants();
             $imageForBdd->setUrl($imageUrl);
@@ -405,7 +405,7 @@ class AppFixtures extends Fixture
         $lEnBut->addTag($tagReunionAffaires);
         $lEnBut->setNumTelephone('+33 4 73 90 68 15');
         $lEnBut->setSlugFolderImage('l_en_but');
-        $lEnBut->setSlugMenu('l_en_but/menu.pdf');
+        $lEnBut->setSlugMenu('menu.pdf');
         // Les jour d'ouverture -> dispo
         $lEnButArrayDispo = [$lundiAnyService, $mardiFullService, $mercrediFullService, $jeudiFullService, $vendrediFullService, $samediFullService, $dimancheAnyService];
         foreach ($lEnButArrayDispo as $jourDispo){
@@ -415,7 +415,7 @@ class AppFixtures extends Fixture
         $manager->persist($lEnBut);
         // J'ajoute les images
 
-        $lEnButArrayImages = ['l_en_but/1.jpg', 'l_en_but/2.jpg', 'l_en_but/3.jpg', 'l_en_but/4.jpg'];
+        $lEnButArrayImages = ['1.jpg', '2.jpg', '3.jpg', '4.jpg'];
         foreach ($lEnButArrayImages as $imageUrl){
             $imageForBdd = new ImagesRestaurants();
             $imageForBdd->setUrl($imageUrl);
@@ -442,7 +442,7 @@ class AppFixtures extends Fixture
         $califorU->addTag($tagSushi);
         $califorU->setNumTelephone('+33 4 85 19 01 58');
         $califorU->setSlugFolderImage('califor_u');
-        $califorU->setSlugMenu('califor_u/menu.jpg');
+        $califorU->setSlugMenu('menu.jpg');
         // Les jour d'ouverture -> dispo
         $califorUArrayDispo = [$lundiServiceSoir, $mardiFullService, $mercrediFullService, $jeudiFullService, $vendrediFullService, $samediFullService, $dimancheServiceSoir];
         foreach ($califorUArrayDispo as $jourDispo){
@@ -452,7 +452,7 @@ class AppFixtures extends Fixture
         $manager->persist($califorU);
         // J'ajoute les images
 
-        $califorUArrayImages = ['califor_u/1.jpg', 'califor_u/2.jpg', 'califor_u/3.jpg', 'califor_u/4.jpg'];
+        $califorUArrayImages = ['1.jpg', '2.jpg', '3.jpg', '4.jpg'];
         foreach ($califorUArrayImages as $imageUrl){
             $imageForBdd = new ImagesRestaurants();
             $imageForBdd->setUrl($imageUrl);
@@ -479,7 +479,7 @@ class AppFixtures extends Fixture
         $fouquets->addTag($tagVegetarien);
         $fouquets->setNumTelephone('+33 1 40 69 60 50');
         $fouquets->setSlugFolderImage('fouquets');
-        $fouquets->setSlugMenu('fouquets/menu.pdf');
+        $fouquets->setSlugMenu('menu.pdf');
         // Les jour d'ouverture -> dispo
         $fouquetsArrayDispo = [$lundiFullService, $mardiFullService, $mercrediFullService, $jeudiFullService, $vendrediFullService, $samediFullService, $dimancheFullService];
         foreach ($fouquetsArrayDispo as $jourDispo){
@@ -489,7 +489,7 @@ class AppFixtures extends Fixture
         $manager->persist($fouquets);
         // J'ajoute les images
 
-        $fouquetsArrayImages = ['fouquets/1.jpg', 'fouquets/2.jpg', 'fouquets/3.jpg', 'fouquets/4.jpg'];
+        $fouquetsArrayImages = ['1.jpg', '2.jpg', '3.jpg', '4.jpg'];
         foreach ($fouquetsArrayImages as $imageUrl){
             $imageForBdd = new ImagesRestaurants();
             $imageForBdd->setUrl($imageUrl);
@@ -516,7 +516,7 @@ class AppFixtures extends Fixture
         $kingMarcel->addTag($tagBurgers);
         $kingMarcel->setNumTelephone('+33 4 78 24 04 54');
         $kingMarcel->setSlugFolderImage('kingMarcelPartDieu');
-        $kingMarcel->setSlugMenu('kingMarcelPartDieu/menu.jpg');
+        $kingMarcel->setSlugMenu('menu.jpg');
         // Les jour d'ouverture -> dispo
         $kingMarcelArrayDispo = [$lundiFullService, $mardiFullService, $mercrediFullService, $jeudiFullService, $vendrediFullService, $samediFullService, $dimancheFullService];
         foreach ($kingMarcelArrayDispo as $jourDispo){
@@ -526,7 +526,7 @@ class AppFixtures extends Fixture
         $manager->persist($kingMarcel);
         // J'ajoute les images
 
-        $kingMarcelArrayImages = ['kingMarcelPartDieu/1.jpg', 'kingMarcelPartDieu/2.jpg', 'kingMarcelPartDieu/3.jpg', 'kingMarcelPartDieu/4.jpg'];
+        $kingMarcelArrayImages = ['1.jpg', '2.jpg', '3.jpg', '4.jpg'];
         foreach ($kingMarcelArrayImages as $imageUrl){
             $imageForBdd = new ImagesRestaurants();
             $imageForBdd->setUrl($imageUrl);
@@ -554,7 +554,7 @@ class AppFixtures extends Fixture
         $ptitCatsel->addTag($tagCuisineLocale);
         $ptitCatsel->setNumTelephone('+33 3 84 44 20 50');
         $ptitCatsel->setSlugFolderImage('ptitCastel');
-        $ptitCatsel->setSlugMenu('ptitCastel/menu.pdf');
+        $ptitCatsel->setSlugMenu('menu.pdf');
         // Les jour d'ouverture -> dispo
         $ptitCatselArrayDispo = [$lundiFullService, $mardiAnyService, $mercrediAnyService, $jeudiFullService, $vendrediFullService, $samediFullService, $dimancheFullService];
         foreach ($ptitCatselArrayDispo as $jourDispo){
@@ -564,7 +564,7 @@ class AppFixtures extends Fixture
         $manager->persist($ptitCatsel);
         // J'ajoute les images
 
-        $ptitCatselArrayImages = ['ptitCastel/1.jpg', 'ptitCastel/2.jpg', 'ptitCastel/3.jpg', 'ptitCastel/4.jpg'];
+        $ptitCatselArrayImages = ['1.jpg', '2.jpg', '3.jpg', '4.jpg'];
         foreach ($ptitCatselArrayImages as $imageUrl){
             $imageForBdd = new ImagesRestaurants();
             $imageForBdd->setUrl($imageUrl);
@@ -591,7 +591,7 @@ class AppFixtures extends Fixture
         $brasserieGeorges->addTag($tagVegetarien);
         $brasserieGeorges->setNumTelephone('+33 4 72 56 54 54');
         $brasserieGeorges->setSlugFolderImage('brasserieGeorges');
-        $brasserieGeorges->setSlugMenu('brasserieGeorges/menu.pdf');
+        $brasserieGeorges->setSlugMenu('menu.pdf');
         // Les jour d'ouverture -> dispo
         $brasserieGeorgesArrayDispo = [$lundiFullService, $mardiFullService, $mercrediFullService, $jeudiFullService, $vendrediFullService, $samediFullService, $dimancheFullService];
         foreach ($brasserieGeorgesArrayDispo as $jourDispo){
@@ -601,7 +601,7 @@ class AppFixtures extends Fixture
         $manager->persist($brasserieGeorges);
         // J'ajoute les images
 
-        $brasserieGeorgesArrayImages = ['brasserieGeorges/1.jpg', 'brasserieGeorges/2.jpg', 'brasserieGeorges/3.jpg', 'brasserieGeorges/4.jpg'];
+        $brasserieGeorgesArrayImages = ['1.jpg', '2.jpg', '3.jpg', '4.jpg'];
         foreach ($brasserieGeorgesArrayImages as $imageUrl){
             $imageForBdd = new ImagesRestaurants();
             $imageForBdd->setUrl($imageUrl);
@@ -628,7 +628,7 @@ class AppFixtures extends Fixture
         $chamasTacosLyon->addTag($tagTacos);
         $chamasTacosLyon->setNumTelephone('+33 4 78 29 55 59');
         $chamasTacosLyon->setSlugFolderImage('chamasTacosLyon');
-        $chamasTacosLyon->setSlugMenu('chamasTacosLyon/menu.pdf');
+        $chamasTacosLyon->setSlugMenu('menu.pdf');
         // Les jour d'ouverture -> dispo
         $chamasTacosLyonArrayDispo = [$lundiFullService, $mardiFullService, $mercrediFullService, $jeudiFullService, $vendrediFullService, $samediFullService, $dimancheFullService];
         foreach ($chamasTacosLyonArrayDispo as $jourDispo){
@@ -638,7 +638,7 @@ class AppFixtures extends Fixture
         $manager->persist($chamasTacosLyon);
         // J'ajoute les images
 
-        $chamasTacosLyonArrayImages = ['chamasTacosLyon/1.jpg', 'chamasTacosLyon/2.jpg', 'chamasTacosLyon/3.jpg', 'chamasTacosLyon/4.jpg'];
+        $chamasTacosLyonArrayImages = ['1.jpg', '2.jpg', '3.jpg', '4.jpg'];
         foreach ($chamasTacosLyonArrayImages as $imageUrl){
             $imageForBdd = new ImagesRestaurants();
             $imageForBdd->setUrl($imageUrl);
