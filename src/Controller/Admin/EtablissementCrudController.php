@@ -59,7 +59,7 @@ class EtablissementCrudController extends AbstractCrudController
 
 //            SlugField::new('slugFolderImage', 'Nom du dossier où les images sont dl'),
         //    ImageField::new('slug_menu', 'Nom du menu')
-            AssociationField::new('dispoOuvertures', 'Definir vos périodes d\'ouverture')->hideOnIndex(),
+          //  AssociationField::new('dispoOuvertures', 'Definir vos périodes d\'ouverture')->hideOnIndex(),
             MultipleImageField::new('imageFile')
                 ->setRequired(false)
                 ->onlyOnForms(),
@@ -99,9 +99,9 @@ class EtablissementCrudController extends AbstractCrudController
             rename($this->getParameter('kernel.project_dir').'\\public\\images\\restaurants\\'.$entityInstance->getSlugMenu(), $this->getParameter('kernel.project_dir').'\\public\\images\\restaurants\\'.$entityInstance->getSlugFolderImage().'\\'.$entityInstance->getSlugMenu());
         }
         // Les jour d'ouverture -> dispo
-        foreach ($entityInstance->getDispoOuvertures() as $jourDispo){
+      /*  foreach ($entityInstance->getDispoOuvertures() as $jourDispo){
             $resto->addDispoOuverture($jourDispo);
-        }
+        }*/
 
             $entityManager->persist($resto);
         // J'ajoute les images
