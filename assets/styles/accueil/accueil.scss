@@ -5,3 +5,9 @@
     object-fit: cover;
   }
 }
+.page-item.active .page-link{
+  background-color: #FF7E09!important;
+}
+.pagination {
+  justify-content: center;
+}

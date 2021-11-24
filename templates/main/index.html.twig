@@ -5,12 +5,18 @@
 {% block body %}
 
 <div class="container py-4">
+    <h2 class="text-danger text-center">Trouvez votre bonheur parmis les {{ pagination.getTotalItemCount }} restaurants disponible</h2>
     <div class="row" id="card-accueil">
-        {% for resto in restos %}
+        {% for resto in pagination %}
             <div class="col-12 col-md-6 col-lg-4 mt-2">
                 {% include 'main/layout/_cardAccueil.html.twig' %}
             </div>
         {% endfor %}
+    </div>
+
+    {# display navigation #}
+    <div class="navigation mt-3">
+        {{ knp_pagination_render(pagination) }}
     </div>
 </div>
 {% endblock %}

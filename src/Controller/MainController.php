@@ -3,7 +3,10 @@
 namespace App\Controller;
 
 use App\Repository\EtablissementRepository;
+use Doctrine\ORM\EntityManager;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -12,12 +15,17 @@ class MainController extends AbstractController
     /**
      * @Route("/", name="accueil")
      */
-    public function index(EtablissementRepository $etablissementRepository): Response
+    public function index(EtablissementRepository $etablissementRepository, PaginatorInterface $paginator, Request $request): Response
     {
 
         $restos = $etablissementRepository->findAll();
+        $pagination = $paginator->paginate(
+            $restos,
+            $request->query->getInt('page', 1),
+            6
+        );
         return $this->render('main/index.html.twig', [
-            'controller_name' => 'MainController',
+            'pagination' => $pagination,
             'restos'=>$restos
         ]);
     }
