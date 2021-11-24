@@ -20,11 +20,6 @@ class DispoOuverture
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=20)
-     */
-    private $nomJour;
-
-    /**
      * @ORM\Column(type="boolean")
      */
     private $service_midi;
@@ -35,13 +30,15 @@ class DispoOuverture
     private $service_soir;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Etablissement::class, inversedBy="dispoOuvertures")
+     * @ORM\OneToMany(targetEntity=RelationRestoJourDispo::class, mappedBy="dispoOuverture")
      */
-    private $id_etablissement;
+    private $relationRestoJourDispos;
+
 
     public function __construct()
     {
         $this->id_etablissement = new ArrayCollection();
+        $this->relationRestoJourDispos = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -85,29 +82,6 @@ class DispoOuverture
         return $this;
     }
 
-    /**
-     * @return Collection|Etablissement[]
-     */
-    public function getIdEtablissement(): Collection
-    {
-        return $this->id_etablissement;
-    }
-
-    public function addIdEtablissement(Etablissement $idEtablissement): self
-    {
-        if (!$this->id_etablissement->contains($idEtablissement)) {
-            $this->id_etablissement[] = $idEtablissement;
-        }
-
-        return $this;
-    }
-
-    public function removeIdEtablissement(Etablissement $idEtablissement): self
-    {
-        $this->id_etablissement->removeElement($idEtablissement);
-
-        return $this;
-    }
     public function __toString()
     {
         if ($this->service_midi && $this->service_soir){
@@ -120,5 +94,35 @@ class DispoOuverture
             return $this->nomJour.' Aucun service';
         }
 
+    }
+
+    /**
+     * @return Collection|RelationRestoJourDispo[]
+     */
+    public function getRelationRestoJourDispos(): Collection
+    {
+        return $this->relationRestoJourDispos;
+    }
+
+    public function addRelationRestoJourDispo(RelationRestoJourDispo $relationRestoJourDispo): self
+    {
+        if (!$this->relationRestoJourDispos->contains($relationRestoJourDispo)) {
+            $this->relationRestoJourDispos[] = $relationRestoJourDispo;
+            $relationRestoJourDispo->setDispoOuverture($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRelationRestoJourDispo(RelationRestoJourDispo $relationRestoJourDispo): self
+    {
+        if ($this->relationRestoJourDispos->removeElement($relationRestoJourDispo)) {
+            // set the owning side to null (unless already changed)
+            if ($relationRestoJourDispo->getDispoOuverture() === $this) {
+                $relationRestoJourDispo->setDispoOuverture(null);
+            }
+        }
+
+        return $this;
     }
 }

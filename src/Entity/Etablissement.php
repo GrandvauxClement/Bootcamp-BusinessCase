@@ -86,11 +86,6 @@ class Etablissement
     private $id_type_cuisine;
 
     /**
-     * @ORM\ManyToMany(targetEntity=DispoOuverture::class, mappedBy="id_etablissement")
-     */
-    private $dispoOuvertures;
-
-    /**
      * @ORM\ManyToMany(targetEntity=Tags::class, inversedBy="etablissements")
      */
     private $tags;
@@ -122,6 +117,11 @@ class Etablissement
 
     private $imageFile;
 
+    /**
+     * @ORM\OneToMany(targetEntity=RelationRestoJourDispo::class, mappedBy="restaurant", orphanRemoval=true)
+     */
+    private $relationRestoJourDispos;
+
 
     public function __construct()
     {
@@ -129,6 +129,7 @@ class Etablissement
         $this->dispoOuvertures = new ArrayCollection();
         $this->tags = new ArrayCollection();
         $this->reservations = new ArrayCollection();
+        $this->relationRestoJourDispos = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -318,32 +319,6 @@ class Etablissement
         return $this;
     }
 
-    /**
-     * @return Collection|DispoOuverture[]
-     */
-    public function getDispoOuvertures(): Collection
-    {
-        return $this->dispoOuvertures;
-    }
-
-    public function addDispoOuverture(DispoOuverture $dispoOuverture): self
-    {
-        if (!$this->dispoOuvertures->contains($dispoOuverture)) {
-            $this->dispoOuvertures[] = $dispoOuverture;
-            $dispoOuverture->addIdEtablissement($this);
-        }
-
-        return $this;
-    }
-
-    public function removeDispoOuverture(DispoOuverture $dispoOuverture): self
-    {
-        if ($this->dispoOuvertures->removeElement($dispoOuverture)) {
-            $dispoOuverture->removeIdEtablissement($this);
-        }
-
-        return $this;
-    }
 
     /**
      * @return Collection|Tags[]
@@ -460,5 +435,35 @@ class Etablissement
     public function setImageFile($imageFile): void
     {
         $this->imageFile = $imageFile;
+    }
+
+    /**
+     * @return Collection|RelationRestoJourDispo[]
+     */
+    public function getRelationRestoJourDispos(): Collection
+    {
+        return $this->relationRestoJourDispos;
+    }
+
+    public function addRelationRestoJourDispo(RelationRestoJourDispo $relationRestoJourDispo): self
+    {
+        if (!$this->relationRestoJourDispos->contains($relationRestoJourDispo)) {
+            $this->relationRestoJourDispos[] = $relationRestoJourDispo;
+            $relationRestoJourDispo->setRestaurant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRelationRestoJourDispo(RelationRestoJourDispo $relationRestoJourDispo): self
+    {
+        if ($this->relationRestoJourDispos->removeElement($relationRestoJourDispo)) {
+            // set the owning side to null (unless already changed)
+            if ($relationRestoJourDispo->getRestaurant() === $this) {
+                $relationRestoJourDispo->setRestaurant(null);
+            }
+        }
+
+        return $this;
     }
 }
