@@ -3,15 +3,23 @@
 namespace App\Controller\Admin;
 
 use App\Controller\Admin\Fields\MultipleImageField;
+use App\Entity\DispoOuverture;
 use App\Entity\Etablissement;
 use App\Entity\ImagesRestaurants;
+use App\Entity\JourSemaine;
+use App\Entity\RelationRestoJourDispo;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Config\KeyValueStore;
+use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
@@ -22,6 +30,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Form\Type\FileUploadType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\FormInterface;
 
 class EtablissementCrudController extends AbstractCrudController
 {
@@ -34,11 +45,15 @@ class EtablissementCrudController extends AbstractCrudController
     {
         return [
             IdField::new('id', 'Id')->onlyOnIndex(),
+            FormField::addPanel('Informations générales'),
             TextField::new('nom', 'Nom'),
             TextEditorField::new('description', 'Description')->hideOnIndex(),
-            TextField::new('rue', 'Numéro et nom de rue')->hideOnIndex(),
+            IntegerField::new('num_rue','Numéro de la rue')->hideOnIndex(),
+            TextField::new('rue', 'Nom de la rue')->hideOnIndex(),
             TextField::new('code_postal', 'Code Postal')->hideOnIndex(),
             TextField::new('ville','Ville'),
+            TelephoneField::new('numTelephone','Numéro de télephone'),
+            FormField::addPanel('Capacité d\'accueil et type de cuisine'),
             IntegerField::new('nbre_place_total','Nombre de couvert total'),
             BooleanField::new('accepte_reservation','Accepte les réservations'),
             TimeField::new('service_midi_debut_time','Heure de début du service du midi')->hideOnIndex(),
@@ -48,7 +63,7 @@ class EtablissementCrudController extends AbstractCrudController
             AssociationField::new('id_type_cuisine','Type de cuisine'),
             AssociationField::new('tags','Les différents tags')->hideOnIndex(),
             NumberField::new('note','Notation du resto'),
-            TelephoneField::new('numTelephone','Numéro de télephone'),
+            FormField::addPanel('Telechargement d\'image de présentation et du menu'),
             ImageField::new('slug_menu', 'Telecharger votre menu')
                 ->setBasePath('restaurants/')
                 ->setUploadDir('public/images/restaurants')
@@ -59,20 +74,87 @@ class EtablissementCrudController extends AbstractCrudController
 
 //            SlugField::new('slugFolderImage', 'Nom du dossier où les images sont dl'),
         //    ImageField::new('slug_menu', 'Nom du menu')
-          //  AssociationField::new('dispoOuvertures', 'Definir vos périodes d\'ouverture')->hideOnIndex(),
+          //  CollectionField::new('relationRestoJourDispos', 'Definir vos périodes d\'ouverture')->hideOnIndex(),
+           // AssociationField::new('relationRestoJourDispos', 'Definir vos périodes d\'ouverture')->hideOnIndex(),
             MultipleImageField::new('imageFile')
                 ->setRequired(false)
                 ->onlyOnForms(),
+            FormField::addPanel('Choix de vos disponibilités par jour '),
+            ChoiceField::new('dispoLundi', 'Choisissez votre disponibilité du lundi')
+                ->renderExpanded(true)
+                ->allowMultipleChoices(true)
+                ->onlyOnForms()
+                ->setChoices(
+                    [
+                        'Service du midi'=>'midi',
+                        'Service du soir'=>'soir',
+                    ]),
+            ChoiceField::new('dispoMardi', 'Choisissez votre disponibilité du mardi')
+                ->renderExpanded(true)
+                ->allowMultipleChoices(true)
+                ->onlyOnForms()
+                ->setChoices(
+                    [
+                        'Service du midi'=>'midi',
+                        'Service du soir'=>'soir',
+                    ]),
+
+            ChoiceField::new('dispoMercredi', 'Choisissez votre disponibilité du mercredi')
+                ->renderExpanded(true)
+                ->allowMultipleChoices(true)
+                ->onlyOnForms()
+                ->setChoices(
+                    [
+                        'Service du midi'=>'midi',
+                        'Service du soir'=>'soir',
+                    ]),
+            ChoiceField::new('dispoJeudi', 'Choisissez votre disponibilité du jeudi')
+                ->renderExpanded(true)
+                ->allowMultipleChoices(true)
+                ->onlyOnForms()
+                ->setChoices(
+                    [
+                        'Service du midi'=>'midi',
+                        'Service du soir'=>'soir',
+                    ]),
+            ChoiceField::new('dispoVendredi', 'Choisissez votre disponibilité du vendredi')
+                ->renderExpanded(true)
+                ->allowMultipleChoices(true)
+                ->onlyOnForms()
+                ->setChoices(
+                    [
+                        'Service du midi'=>'midi',
+                        'Service du soir'=>'soir',
+                    ]),
+            ChoiceField::new('dispoSamedi', 'Choisissez votre disponibilité du samedi')
+                ->renderExpanded(true)
+                ->allowMultipleChoices(true)
+                ->onlyOnForms()
+                ->setChoices(
+                    [
+                        'Service du midi'=>'midi',
+                        'Service du soir'=>'soir',
+                    ]),
+            ChoiceField::new('dispoDimanche', 'Choisissez votre disponibilité du dimanche')
+                ->renderExpanded(true)
+                ->allowMultipleChoices(true)
+                ->onlyOnForms()
+                ->setChoices(
+                    [
+                        'Service du midi'=>'midi',
+                        'Service du soir'=>'soir',
+                    ]),
         ];
     }
+
 
     public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
         if ($entityInstance instanceof Etablissement){
 
-
         $resto = new Etablissement();
         $resto->setNom($entityInstance->getNom());
+        $resto->setNumRue($entityInstance->getNumRue());
         $resto->setRue($entityInstance->getRue());
         $resto->setVille($entityInstance->getVille());
         $resto->setCodePostal($entityInstance->getCodePostal());
@@ -98,10 +180,6 @@ class EtablissementCrudController extends AbstractCrudController
             }
             rename($this->getParameter('kernel.project_dir').'\\public\\images\\restaurants\\'.$entityInstance->getSlugMenu(), $this->getParameter('kernel.project_dir').'\\public\\images\\restaurants\\'.$entityInstance->getSlugFolderImage().'\\'.$entityInstance->getSlugMenu());
         }
-        // Les jour d'ouverture -> dispo
-      /*  foreach ($entityInstance->getDispoOuvertures() as $jourDispo){
-            $resto->addDispoOuverture($jourDispo);
-        }*/
 
             $entityManager->persist($resto);
         // J'ajoute les images
@@ -113,6 +191,123 @@ class EtablissementCrudController extends AbstractCrudController
             $imageForBdd->setIdEtablissement($resto);
             $entityManager->persist($imageForBdd);
         }
+
+
+            // J'ajout les disponnibiltés d'ouverture
+            //Pour ça je recup d'abord mes 4 dispo possible
+            $fullService = $this->getDoctrine()->getRepository(DispoOuverture::class)->findOneBy(['service_midi'=>true, 'service_soir'=>true]);
+            $anyService = $this->getDoctrine()->getRepository(DispoOuverture::class)->findOneBy(['service_midi'=>false, 'service_soir'=>false]);
+            $onlyLunch = $this->getDoctrine()->getRepository(DispoOuverture::class)->findOneBy(['service_midi'=>true, 'service_soir'=>false]);
+            $onlyDinner = $this->getDoctrine()->getRepository(DispoOuverture::class)->findOneBy(['service_midi'=>false, 'service_soir'=>true]);
+            // Puis je récup également mes 7 jours de la semaine
+            $lundi = $this->getDoctrine()->getRepository(JourSemaine::class)->findOneBy(['nom'=>'lundi']);
+            $mardi = $this->getDoctrine()->getRepository(JourSemaine::class)->findOneBy(['nom'=>'mardi']);
+            $mercredi = $this->getDoctrine()->getRepository(JourSemaine::class)->findOneBy(['nom'=>'mercredi']);
+            $jeudi = $this->getDoctrine()->getRepository(JourSemaine::class)->findOneBy(['nom'=>'jeudi']);
+            $vendredi = $this->getDoctrine()->getRepository(JourSemaine::class)->findOneBy(['nom'=>'vendredi']);
+            $samedi = $this->getDoctrine()->getRepository(JourSemaine::class)->findOneBy(['nom'=>'samedi']);
+            $dimanche = $this->getDoctrine()->getRepository(JourSemaine::class)->findOneBy(['nom'=>'dimanche']);
+
+            // Je peux maintenant ajouté mes dispo
+
+            $dispoLundi = new RelationRestoJourDispo();
+            $dispoLundi->setNomJour($lundi);
+            $dispoLundi->setRestaurant($resto);
+            if (in_array('midi', $entityInstance->getDispoLundi(), true)  && in_array('soir', $entityInstance->getDispoLundi(), true)){
+                $dispoLundi->setDispoOuverture($fullService);
+            } elseif (!in_array('midi', $entityInstance->getDispoLundi(), true)   && in_array('soir', $entityInstance->getDispoLundi(), true)) {
+                $dispoLundi->setDispoOuverture($onlyDinner);
+            } elseif (in_array('midi', $entityInstance->getDispoLundi(), true) && !in_array('soir', $entityInstance->getDispoLundi(), true) ) {
+                $dispoLundi->setDispoOuverture($onlyLunch);
+            } else {
+                $dispoLundi->setDispoOuverture($anyService);
+            }
+            $entityManager->persist($dispoLundi);
+
+            $dispoMardi = new RelationRestoJourDispo();
+            $dispoMardi->setNomJour($mardi);
+            $dispoMardi->setRestaurant($resto);
+            if (in_array('midi', $entityInstance->getDispoMardi(), true)  && in_array('soir', $entityInstance->getDispoMardi(), true)){
+                $dispoLundi->setDispoOuverture($fullService);
+            } elseif (!in_array('midi', $entityInstance->getDispoMardi(), true)   && in_array('soir', $entityInstance->getDispoMardi(), true)) {
+                $dispoLundi->setDispoOuverture($onlyDinner);
+            } elseif (in_array('midi', $entityInstance->getDispoMardi(), true) && !in_array('soir', $entityInstance->getDispoMardi(), true) ) {
+                $dispoLundi->setDispoOuverture($onlyLunch);
+            } else {
+                $dispoLundi->setDispoOuverture($anyService);
+            }
+            $entityManager->persist($dispoMardi);
+
+            $dispoMercredi = new RelationRestoJourDispo();
+            $dispoMercredi->setNomJour($mercredi);
+            $dispoMercredi->setRestaurant($resto);
+            if (in_array('midi', $entityInstance->getDispoMercredi(), true)  && in_array('soir', $entityInstance->getDispoMercredi(), true)){
+                $dispoLundi->setDispoOuverture($fullService);
+            } elseif (!in_array('midi', $entityInstance->getDispoMercredi(), true)   && in_array('soir', $entityInstance->getDispoMercredi(), true)) {
+                $dispoLundi->setDispoOuverture($onlyDinner);
+            } elseif (in_array('midi', $entityInstance->getDispoMercredi(), true) && !in_array('soir', $entityInstance->getDispoMercredi(), true) ) {
+                $dispoLundi->setDispoOuverture($onlyLunch);
+            } else {
+                $dispoLundi->setDispoOuverture($anyService);
+            }
+            $entityManager->persist($dispoMercredi);
+
+            $dispoJeudi = new RelationRestoJourDispo();
+            $dispoJeudi->setNomJour($jeudi);
+            $dispoJeudi->setRestaurant($resto);
+            if (in_array('midi', $entityInstance->getDispoJeudi(), true)  && in_array('soir', $entityInstance->getDispoJeudi(), true)){
+                $dispoLundi->setDispoOuverture($fullService);
+            } elseif (!in_array('midi', $entityInstance->getDispoJeudi(), true)   && in_array('soir', $entityInstance->getDispoJeudi(), true)) {
+                $dispoLundi->setDispoOuverture($onlyDinner);
+            } elseif (in_array('midi', $entityInstance->getDispoJeudi(), true) && !in_array('soir', $entityInstance->getDispoJeudi(), true) ) {
+                $dispoLundi->setDispoOuverture($onlyLunch);
+            } else {
+                $dispoLundi->setDispoOuverture($anyService);
+            }
+            $entityManager->persist($dispoJeudi);
+
+            $dispoVendredi = new RelationRestoJourDispo();
+            $dispoVendredi->setNomJour($vendredi);
+            $dispoVendredi->setRestaurant($resto);
+            if (in_array('midi', $entityInstance->getDispoVendredi(), true)  && in_array('soir', $entityInstance->getDispoVendredi(), true)){
+                $dispoLundi->setDispoOuverture($fullService);
+            } elseif (!in_array('midi', $entityInstance->getDispoVendredi(), true)   && in_array('soir', $entityInstance->getDispoVendredi(), true)) {
+                $dispoLundi->setDispoOuverture($onlyDinner);
+            } elseif (in_array('midi', $entityInstance->getDispoVendredi(), true) && !in_array('soir', $entityInstance->getDispoVendredi(), true) ) {
+                $dispoLundi->setDispoOuverture($onlyLunch);
+            } else {
+                $dispoLundi->setDispoOuverture($anyService);
+            }
+            $entityManager->persist($dispoVendredi);
+
+            $dispoSamedi = new RelationRestoJourDispo();
+            $dispoSamedi->setNomJour($samedi);
+            $dispoSamedi->setRestaurant($resto);
+            if (in_array('midi', $entityInstance->getDispoSamedi(), true)  && in_array('soir', $entityInstance->getDispoSamedi(), true)){
+                $dispoSamedi->setDispoOuverture($fullService);
+            } elseif (!in_array('midi', $entityInstance->getDispoSamedi(), true)   && in_array('soir', $entityInstance->getDispoSamedi(), true)) {
+                $dispoSamedi->setDispoOuverture($onlyDinner);
+            } elseif (in_array('midi', $entityInstance->getDispoSamedi(), true) && !in_array('soir', $entityInstance->getDispoSamedi(), true) ) {
+                $dispoSamedi->setDispoOuverture($onlyLunch);
+            } else {
+                $dispoSamedi->setDispoOuverture($anyService);
+            }
+            $entityManager->persist($dispoSamedi);
+
+            $dispoDimanche = new RelationRestoJourDispo();
+            $dispoDimanche->setNomJour($dimanche);
+            $dispoDimanche->setRestaurant($resto);
+            if (in_array('midi', $entityInstance->getDispoDimanche(), true)  && in_array('soir', $entityInstance->getDispoDimanche(), true)){
+                $dispoDimanche->setDispoOuverture($fullService);
+            } elseif (!in_array('midi', $entityInstance->getDispoDimanche(), true)   && in_array('soir', $entityInstance->getDispoDimanche(), true)) {
+                $dispoDimanche->setDispoOuverture($onlyDinner);
+            } elseif (in_array('midi', $entityInstance->getDispoDimanche(), true) && !in_array('soir', $entityInstance->getDispoDimanche(), true) ) {
+                $dispoDimanche->setDispoOuverture($onlyLunch);
+            } else {
+                $dispoDimanche->setDispoOuverture($anyService);
+            }
+            $entityManager->persist($dispoDimanche);
+
         $entityManager->flush();
         }
     }

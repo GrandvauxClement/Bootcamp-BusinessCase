@@ -75,4 +75,9 @@ class RelationRestoJourDispo
 
         return $this;
     }
+
+    public function __toString()
+    {
+       return $this->nomJour.' midi:'.$this->getDispoOuverture()->getServiceMidi().' soir:'.$this->getDispoOuverture()->getServiceSoir();
+    }
 }
