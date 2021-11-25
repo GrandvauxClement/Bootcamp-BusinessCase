@@ -117,10 +117,23 @@ class Etablissement
 
     private $imageFile;
 
+    private $dispoLundi;
+    private $dispoMardi;
+    private $dispoMercredi;
+    private $dispoJeudi;
+    private $dispoVendredi;
+    private $dispoSamedi;
+    private $dispoDimanche;
+
     /**
      * @ORM\OneToMany(targetEntity=RelationRestoJourDispo::class, mappedBy="restaurant", orphanRemoval=true)
      */
     private $relationRestoJourDispos;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $num_rue;
 
 
     public function __construct()
@@ -466,4 +479,130 @@ class Etablissement
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getDispoLundi()
+    {
+        return $this->dispoLundi;
+    }
+
+    /**
+     * @param mixed $dispoLundi
+     */
+    public function setDispoLundi($dispoLundi): void
+    {
+        $this->dispoLundi = $dispoLundi;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDispoMardi()
+    {
+        return $this->dispoMardi;
+    }
+
+    /**
+     * @param mixed $dispoMardi
+     */
+    public function setDispoMardi($dispoMardi): void
+    {
+        $this->dispoMardi = $dispoMardi;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDispoMercredi()
+    {
+        return $this->dispoMercredi;
+    }
+
+    /**
+     * @param mixed $dispoMercredi
+     */
+    public function setDispoMercredi($dispoMercredi): void
+    {
+        $this->dispoMercredi = $dispoMercredi;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDispoJeudi()
+    {
+        return $this->dispoJeudi;
+    }
+
+    /**
+     * @param mixed $dispoJeudi
+     */
+    public function setDispoJeudi($dispoJeudi): void
+    {
+        $this->dispoJeudi = $dispoJeudi;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDispoVendredi()
+    {
+        return $this->dispoVendredi;
+    }
+
+    /**
+     * @param mixed $dispoVendredi
+     */
+    public function setDispoVendredi($dispoVendredi): void
+    {
+        $this->dispoVendredi = $dispoVendredi;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDispoSamedi()
+    {
+        return $this->dispoSamedi;
+    }
+
+    /**
+     * @param mixed $dispoSamedi
+     */
+    public function setDispoSamedi($dispoSamedi): void
+    {
+        $this->dispoSamedi = $dispoSamedi;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDispoDimanche()
+    {
+        return $this->dispoDimanche;
+    }
+
+    /**
+     * @param mixed $dispoDimanche
+     */
+    public function setDispoDimanche($dispoDimanche): void
+    {
+        $this->dispoDimanche = $dispoDimanche;
+    }
+
+    public function getNumRue(): ?int
+    {
+        return $this->num_rue;
+    }
+
+    public function setNumRue(?int $num_rue): self
+    {
+        $this->num_rue = $num_rue;
+
+        return $this;
+    }
+
+
 }

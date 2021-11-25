@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Etablissement;
 use App\Entity\ImagesRestaurants;
+use App\Entity\RelationRestoJourDispo;
 use App\Entity\Tags;
 use App\Entity\TypeCuisine;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;

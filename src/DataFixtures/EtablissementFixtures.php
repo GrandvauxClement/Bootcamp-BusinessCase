@@ -18,7 +18,8 @@ class EtablissementFixtures extends Fixture implements DependentFixtureInterface
         // Dabord les info de l'établissement -- 1ER ETABLISSEMENT
         $leMadras = new Etablissement();
         $leMadras->setNom('Le Madras');
-        $leMadras->setRue('8 rue Ramond');
+        $leMadras->setNumRue(8);
+        $leMadras->setRue('Rue Ramond');
         $leMadras->setVille('Clermont-Fd');
         $leMadras->setCodePostal('63000');
         $leMadras->setAccepteReservation(true);
@@ -55,7 +56,8 @@ class EtablissementFixtures extends Fixture implements DependentFixtureInterface
         //------------------ 2EME ETABLISSEMENT ----------------------------
         $lEnBut = new Etablissement();
         $lEnBut->setNom('L\'En-But');
-        $lEnBut->setRue('107 avenue de la Republique');
+        $lEnBut->setNumRue(107);
+        $lEnBut->setRue('Avenue de la Republique');
         $lEnBut->setVille('Clermont-Fd');
         $lEnBut->setCodePostal('63000');
         $lEnBut->setAccepteReservation(true);
@@ -92,7 +94,8 @@ class EtablissementFixtures extends Fixture implements DependentFixtureInterface
         //------------------ 3EME ETABLISSEMENT ----------------------------
         $califorU = new Etablissement();
         $califorU->setNom('Califor\'U');
-        $califorU->setRue('30 Rue Condorcet');
+        $califorU->setNumRue(30);
+        $califorU->setRue('Rue Condorcet');
         $califorU->setVille('Grenoble');
         $califorU->setCodePostal('38000');
         $califorU->setAccepteReservation(true);
@@ -129,7 +132,8 @@ class EtablissementFixtures extends Fixture implements DependentFixtureInterface
         //------------------ 4EME ETABLISSEMENT ----------------------------
         $fouquets = new Etablissement();
         $fouquets->setNom('Le Fouquet\'s');
-        $fouquets->setRue('99 Avenue des Champs-Elysées');
+        $fouquets->setNumRue(99);
+        $fouquets->setRue('Avenue des Champs-Elysées');
         $fouquets->setVille('Paris');
         $fouquets->setCodePostal('75008');
         $fouquets->setAccepteReservation(true);
@@ -165,7 +169,8 @@ class EtablissementFixtures extends Fixture implements DependentFixtureInterface
         //------------------ 5EME ETABLISSEMENT ----------------------------
         $kingMarcel = new Etablissement();
         $kingMarcel->setNom('King Marcel Part Dieu');
-        $kingMarcel->setRue('26 Boulevard Jules Favre');
+        $kingMarcel->setNumRue(26);
+        $kingMarcel->setRue('Boulevard Jules Favre');
         $kingMarcel->setVille('Lyon');
         $kingMarcel->setCodePostal('69006');
         $kingMarcel->setAccepteReservation(true);
@@ -240,7 +245,8 @@ class EtablissementFixtures extends Fixture implements DependentFixtureInterface
         //------------------ 7EME ETABLISSEMENT ----------------------------
         $brasserieGeorges = new Etablissement();
         $brasserieGeorges->setNom('Brasserie Georges');
-        $brasserieGeorges->setRue('30 cours de Verdun Perrache');
+        $brasserieGeorges->setNumRue(30);
+        $brasserieGeorges->setRue('Cours de Verdun Perrache');
         $brasserieGeorges->setVille('Lyon');
         $brasserieGeorges->setCodePostal('69002');
         $brasserieGeorges->setAccepteReservation(true);
@@ -276,7 +282,8 @@ class EtablissementFixtures extends Fixture implements DependentFixtureInterface
         //------------------ 8EME ETABLISSEMENT ----------------------------
         $chamasTacosLyon = new Etablissement();
         $chamasTacosLyon->setNom('Chamas Tacos Lyon');
-        $chamasTacosLyon->setRue('10 rue Terme');
+        $chamasTacosLyon->setNumRue(10);
+        $chamasTacosLyon->setRue('Rue Terme');
         $chamasTacosLyon->setVille('Lyon');
         $chamasTacosLyon->setCodePostal('69001');
         $chamasTacosLyon->setAccepteReservation(true);
