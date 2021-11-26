@@ -13,6 +13,7 @@ class MultipleImageField implements FieldInterface{
         return (new self())
             ->setProperty($propertyName)
             ->setFormType(FileType::class)
+            ->setLabel($label)
             ->setFormTypeOptions([
                 'multiple'=>true,
                 'data_class'=>null,

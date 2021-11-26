@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ReservationRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ReservationRepository::class)
@@ -19,26 +20,31 @@ class Reservation
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Le prénom doit être renseigné")
      */
     private $prenom;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Le nom doit être renseigné")
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=15)
+     * @Assert\NotBlank(message="Le numéro de téléphone doit être renseigné")
      */
     private $num_tel;
 
     /**
      * @ORM\Column(type="time")
+     * @Assert\NotBlank(message="L'heure d'arrivé' doit être renseigné")
      */
     private $heure_arrive;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank(message="Le nombre de place doit être renseigné")
      */
     private $nbre_place;
 
@@ -58,6 +64,11 @@ class Reservation
      * @ORM\JoinColumn(nullable=false)
      */
     private $id_etat_reservation;
+
+    public function __construct()
+    {
+        $this->created_at = new \DateTimeImmutable('now');
+    }
 
     public function getId(): ?int
     {

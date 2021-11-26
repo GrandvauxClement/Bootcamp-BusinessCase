@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\EtablissementRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
@@ -22,6 +23,8 @@ class Etablissement
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Le nom doit être renseigné")
+     * @Assert\Unique(message="Ce nom existe déjà choisis en un autre !")
      */
     private $nom;
 
@@ -32,21 +35,25 @@ class Etablissement
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="La rue doit être renseigné")
      */
     private $rue;
 
     /**
      * @ORM\Column(type="string", length=6)
+     * @Assert\NotBlank(message="Le code postal doit être renseigné")
      */
     private $code_postal;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="La ville doit être renseigné")
      */
     private $ville;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank(message="Le nombre de place disponible doit être renseigné")
      */
     private $nbre_place_total;
 
@@ -97,6 +104,14 @@ class Etablissement
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\NotBlank(message="La note doit être renseigné")
+     * @Assert\LessThanOrEqual(
+     *     value = 5,
+     *     message="La note doit être inférieur à 5"
+     * )
+     * @Assert\PositiveOrZero(
+     *     message="La note doit être supérieur à 0"
+     * )
      */
     private $note;
 
@@ -139,7 +154,6 @@ class Etablissement
     public function __construct()
     {
         $this->imagesRestaurants = new ArrayCollection();
-        $this->dispoOuvertures = new ArrayCollection();
         $this->tags = new ArrayCollection();
         $this->reservations = new ArrayCollection();
         $this->relationRestoJourDispos = new ArrayCollection();
@@ -152,6 +166,7 @@ class Etablissement
 
     public function getNom(): ?string
     {
+
         return $this->nom;
     }
 
@@ -594,6 +609,85 @@ class Etablissement
 
     public function getNumRue(): ?int
     {
+        if (is_null($this->dispoLundi) || is_null($this->dispoMardi) || is_null($this->dispoMercredi) || is_null($this->dispoJeudi)
+            || is_null($this->dispoVendredi) || is_null($this->dispoSamedi) || is_null($this->dispoDimanche) ){
+            $allDispo = $this->getRelationRestoJourDispos();
+            foreach ($allDispo as $dispo){
+                if ( $dispo->getNomJour() == 'lundi') {
+                    if ($dispo->getDispoOuverture()->getServiceMidi() == false && $dispo->getDispoOuverture()->getServiceSoir() == false){
+                        $this->dispoLundi = [];
+                    } elseif ($dispo->getDispoOuverture()->getServiceMidi() == true && $dispo->getDispoOuverture()->getServiceSoir() == true){
+                        $this->dispoLundi = [0=>"midi",1=>"soir"];
+                    } elseif ($dispo->getDispoOuverture()->getServiceMidi() == true && $dispo->getDispoOuverture()->getServiceSoir() == false) {
+                        $this->dispoLundi = [0=>"midi"];
+                    } else {
+                        $this->dispoLundi = [0=>"soir"];
+                    }
+                } elseif ( $dispo->getNomJour() == 'mardi') {
+                    if ($dispo->getDispoOuverture()->getServiceMidi() == false && $dispo->getDispoOuverture()->getServiceSoir() == false){
+                        $this->dispoMardi = [];
+                    } elseif ($dispo->getDispoOuverture()->getServiceMidi() == true && $dispo->getDispoOuverture()->getServiceSoir() == true){
+                        $this->dispoMardi = [0=>"midi",1=>"soir"];
+                    } elseif ($dispo->getDispoOuverture()->getServiceMidi() == true && $dispo->getDispoOuverture()->getServiceSoir() == false) {
+                        $this->dispoMardi = [0=>"midi"];
+                    } else {
+                        $this->dispoMardi = [0=>"soir"];
+                    }
+                } elseif ( $dispo->getNomJour() == 'mercredi') {
+                    if ($dispo->getDispoOuverture()->getServiceMidi() == false && $dispo->getDispoOuverture()->getServiceSoir() == false){
+                        $this->dispoMercredi = [];
+                    } elseif ($dispo->getDispoOuverture()->getServiceMidi() == true && $dispo->getDispoOuverture()->getServiceSoir() == true){
+                        $this->dispoMercredi = [0=>"midi",1=>"soir"];
+                    } elseif ($dispo->getDispoOuverture()->getServiceMidi() == true && $dispo->getDispoOuverture()->getServiceSoir() == false) {
+                        $this->dispoMercredi = [0=>"midi"];
+                    } else {
+                        $this->dispoMercredi = [0=>"soir"];
+                    }
+                }elseif ( $dispo->getNomJour() == 'jeudi') {
+                    if ($dispo->getDispoOuverture()->getServiceMidi() == false && $dispo->getDispoOuverture()->getServiceSoir() == false){
+                        $this->dispoJeudi = [];
+                    } elseif ($dispo->getDispoOuverture()->getServiceMidi() == true && $dispo->getDispoOuverture()->getServiceSoir() == true){
+                        $this->dispoJeudi = [0=>"midi",1=>"soir"];
+                    } elseif ($dispo->getDispoOuverture()->getServiceMidi() == true && $dispo->getDispoOuverture()->getServiceSoir() == false) {
+                        $this->dispoJeudi = [0=>"midi"];
+                    } else {
+                        $this->dispoJeudi = [0=>"soir"];
+                    }
+                }elseif ( $dispo->getNomJour() == 'vendredi') {
+                    if ($dispo->getDispoOuverture()->getServiceMidi() == false && $dispo->getDispoOuverture()->getServiceSoir() == false){
+                        $this->dispoVendredi = [];
+                    } elseif ($dispo->getDispoOuverture()->getServiceMidi() == true && $dispo->getDispoOuverture()->getServiceSoir() == true){
+                        $this->dispoVendredi = [0=>"midi",1=>"soir"];
+                    } elseif ($dispo->getDispoOuverture()->getServiceMidi() == true && $dispo->getDispoOuverture()->getServiceSoir() == false) {
+                        $this->dispoVendredi = [0=>"midi"];
+                    } else {
+                        $this->dispoVendredi = [0=>"soir"];
+                    }
+                } elseif ( $dispo->getNomJour() == 'samedi') {
+                    if ($dispo->getDispoOuverture()->getServiceMidi() == false && $dispo->getDispoOuverture()->getServiceSoir() == false){
+                        $this->dispoSamedi = [];
+                    } elseif ($dispo->getDispoOuverture()->getServiceMidi() == true && $dispo->getDispoOuverture()->getServiceSoir() == true){
+                        $this->dispoSamedi = [0=>"midi",1=>"soir"];
+                    } elseif ($dispo->getDispoOuverture()->getServiceMidi() == true && $dispo->getDispoOuverture()->getServiceSoir() == false) {
+                        $this->dispoSamedi = [0=>"midi"];
+                    } else {
+                        $this->dispoSamedi = [0=>"soir"];
+                    }
+                }elseif ( $dispo->getNomJour() == 'dimanche') {
+                    if ($dispo->getDispoOuverture()->getServiceMidi() == false && $dispo->getDispoOuverture()->getServiceSoir() == false){
+                        $this->dispoDimanche = [];
+                    } elseif ($dispo->getDispoOuverture()->getServiceMidi() == true && $dispo->getDispoOuverture()->getServiceSoir() == true){
+                        $this->dispoDimanche = [0=>"midi",1=>"soir"];
+                    } elseif ($dispo->getDispoOuverture()->getServiceMidi() == true && $dispo->getDispoOuverture()->getServiceSoir() == false) {
+                        $this->dispoDimanche = [0=>"midi"];
+                    } else {
+                        $this->dispoDimanche = [0=>"soir"];
+                    }
+                }
+
+            }
+        }
+
         return $this->num_rue;
     }
 
@@ -602,6 +696,10 @@ class Etablissement
         $this->num_rue = $num_rue;
 
         return $this;
+    }
+    public function __toString()
+    {
+        return $this->nom;
     }
 
 

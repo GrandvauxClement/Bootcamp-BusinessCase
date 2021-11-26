@@ -41,6 +41,17 @@ class EtablissementCrudController extends AbstractCrudController
         return Etablissement::class;
     }
 
+    public function configureActions(Actions $actions): Actions
+    {
+        return $actions->add(Crud::PAGE_INDEX,'detail');
+    }
+
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->setFormThemes(['backoffice/display-image-edit.html.twig', '@EasyAdmin/crud/form_theme.html.twig']);
+    }
+
     public function configureFields(string $pageName): iterable
     {
         return [
@@ -71,14 +82,15 @@ class EtablissementCrudController extends AbstractCrudController
                 ->setUploadedFileNamePattern('[randomhash].[extension]')
                 ->setRequired(false)
                 ->hideOnIndex(),
-
-//            SlugField::new('slugFolderImage', 'Nom du dossier où les images sont dl'),
-        //    ImageField::new('slug_menu', 'Nom du menu')
-          //  CollectionField::new('relationRestoJourDispos', 'Definir vos périodes d\'ouverture')->hideOnIndex(),
-           // AssociationField::new('relationRestoJourDispos', 'Definir vos périodes d\'ouverture')->hideOnIndex(),
-            MultipleImageField::new('imageFile')
+            CollectionField::new('imagesRestaurants', 'Images Actuelles')
+                ->setFormTypeOptions([
+                    'block_name'=>'custom_display_image',
+                ])
+                ->onlyWhenUpdating(),
+            MultipleImageField::new('imageFile', 'Ajouter des images de présentation')
                 ->setRequired(false)
                 ->onlyOnForms(),
+
             FormField::addPanel('Choix de vos disponibilités par jour '),
             ChoiceField::new('dispoLundi', 'Choisissez votre disponibilité du lundi')
                 ->renderExpanded(true)

@@ -46,18 +46,6 @@ class DispoOuverture
         return $this->id;
     }
 
-    public function getNomJour(): ?string
-    {
-        return $this->nomJour;
-    }
-
-    public function setNomJour(string $nomJour): self
-    {
-        $this->nomJour = $nomJour;
-
-        return $this;
-    }
-
     public function getServiceMidi(): ?bool
     {
         return $this->service_midi;

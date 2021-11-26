@@ -1,0 +1,16 @@
+
+{# templates/admin/form.html.twig #}
+{# note that the Twig block name starts with an uppercase letter
+   ('_Product_...' instead of '_product_...') because the first part
+   of the block name is the unmodified entity name #}
+{% block _Etablissement_custom_display_image_widget %}
+    {# ... #}
+    <div class="row">
+        {% for image in value %}
+            <div class="col-3">
+                <img src="{{asset('images/restaurants/'~image.idEtablissement.slugFolderImage~'/'~ image.url) }}" class="img-fluid">
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

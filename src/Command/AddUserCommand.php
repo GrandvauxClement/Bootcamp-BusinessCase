@@ -162,7 +162,7 @@ class AddUserCommand extends Command
         $user = new User();
         $user->setEmail($email);
         $user->setRoles([$isAdmin ? 'ROLE_ADMIN' : 'ROLE_USER']);
-
+        $user->setIsVerified(true);
 
         // See https://symfony.com/doc/current/security.html#c-encoding-passwords
         $encodedPassword = $this->passwordEncoder->encodePassword($user, $plainPassword);

@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Etablissement;
 use App\Entity\ImagesRestaurants;
 use App\Entity\RelationRestoJourDispo;
+use App\Entity\Reservation;
 use App\Entity\Tags;
 use App\Entity\TypeCuisine;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -31,7 +32,8 @@ class AdminDashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('<div class="d-flex align-items-center justify-content-around"> <img src="images/logo/logo.png" class="img-fluid" style="max-height: 50px"><span class="text-danger mt-1">Dashboard</span></div>');
+            ->setTitle('<div class="d-flex align-items-center justify-content-around"> <img src="images/logo/logo.png" class="img-fluid" style="max-height: 50px"><span class="text-danger mt-1">Dashboard</span></div>')
+            ;
     }
 
     public function configureMenuItems(): iterable
@@ -40,8 +42,11 @@ class AdminDashboardController extends AbstractDashboardController
         yield MenuItem::section('Gestion des restaurants');
         yield MenuItem::linkToCrud('Les Restaurants', 'fas fa-list', Etablissement::class);
         yield MenuItem::linkToCrud('Les Types de cuisines', 'fas fa-utensils', TypeCuisine::class);
-        yield MenuItem::linkToCrud('Les images de Resto', 'fas fa-images', ImagesRestaurants::class);
         yield MenuItem::linkToCrud('Les Tags', 'fas fa-tags', Tags::class);
+        yield MenuItem::section('Les Réservations');
+        yield MenuItem::linkToCrud('Les Réservations', 'fas fa-book', Reservation::class);
+        yield MenuItem::section('Casse toi de l\'appli');
+        yield MenuItem::linkToLogout('Déconnexion', 'fas fa-sign-out-alt');
 //        yield MenuItem::linkToLogout('Logout', 'fa fa-exit');
     }
 }
