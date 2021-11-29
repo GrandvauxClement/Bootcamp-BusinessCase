@@ -9,10 +9,16 @@
     <div class="row">
         {% for image in value %}
             <div class="col-3">
-                <img src="{{asset('images/restaurants/'~image.idEtablissement.slugFolderImage~'/'~ image.url) }}" class="img-fluid">
-                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal{{ image.id }}">
-                    Supprimer
-                </button>
+                <div class="card w-100" >
+                    <img src="{{asset('images/restaurants/'~image.idEtablissement.slugFolderImage~'/'~ image.url) }}" class="card-img-top" style="height: 110px" alt="...">
+                    <div class="card-body">
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal{{ image.id }}">
+                            Supprimer
+                        </button>
+                    </div>
+                </div>
+            </div>
+
                 <div class="modal fade" id="exampleModal{{ image.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -30,10 +36,6 @@
                         </div>
                     </div>
                 </div>
-
-
-
-            </div>
         {% endfor %}
     </div>
 {% endblock %}

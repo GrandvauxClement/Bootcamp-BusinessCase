@@ -472,10 +472,8 @@ class EtablissementCrudController extends AbstractCrudController
         }
         unlink($this->getParameter('images_restaurant').'/'.$entityInstance->getSlugFolderImage().'/'.$entityInstance->getSlugMenu());
         rmdir($this->getParameter('images_restaurant').'/'.$entityInstance->getSlugFolderImage());
-        dd('ici');
         $entityManager->remove($entityInstance);
-        $entityInstance->flush();
-        dd('je passe ici');
+        $entityManager->flush();
     }
 
 }
