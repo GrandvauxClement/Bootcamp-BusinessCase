@@ -24,7 +24,6 @@ class Etablissement
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Le nom doit être renseigné")
-     * @Assert\Unique(message="Ce nom existe déjà choisis en un autre !")
      */
     private $nom;
 
@@ -130,7 +129,11 @@ class Etablissement
      */
     private $slug_menu;
 
+    private $old_slug_menu;
+
     private $imageFile;
+
+    private $oldImageFile;
 
     private $dispoLundi;
     private $dispoMardi;
@@ -310,6 +313,13 @@ class Etablissement
      */
     public function getImagesRestaurants(): Collection
     {
+        if (is_null($this->oldImageFile)){
+            $oldArrayUrl = [];
+            foreach ($this->imagesRestaurants as $resto){
+                $oldArrayUrl += [$resto->getId()=>$resto->getUrl()];
+            }
+            $this->setOldImageFile($oldArrayUrl);
+        }
         return $this->imagesRestaurants;
     }
 
@@ -445,9 +455,27 @@ class Etablissement
 
     public function setSlugMenu(?string $slug_menu): self
     {
+        $this->old_slug_menu = $this->slug_menu;
         $this->slug_menu = $slug_menu;
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getOldSlugMenu()
+    {
+        return $this->old_slug_menu;
+    }
+
+    /**
+     * @param mixed $old_slug_menu
+     */
+    public function setOldSlugMenu($old_slug_menu): void
+    {
+        $this->old_slug_menu = $old_slug_menu;
+    }
+
 
     /**
      * @return mixed
@@ -697,10 +725,25 @@ class Etablissement
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getOldImageFile()
+    {
+        return $this->oldImageFile;
+    }
+
+    /**
+     * @param mixed $oldImageFile
+     */
+    public function setOldImageFile($oldImageFile): void
+    {
+        $this->oldImageFile = $oldImageFile;
+    }
+
     public function __toString()
     {
         return $this->nom;
     }
-
-
 }

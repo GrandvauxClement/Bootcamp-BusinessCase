@@ -162,6 +162,7 @@ class EtablissementCrudController extends AbstractCrudController
 
     public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
+
         if ($entityInstance instanceof Etablissement){
 
         $resto = new Etablissement();
@@ -198,8 +199,9 @@ class EtablissementCrudController extends AbstractCrudController
 
         foreach ($entityInstance->getImageFile() as $imageUrl){
             $imageForBdd = new ImagesRestaurants();
-            $imageUrl->move('images/restaurants/'.$resto->getSlugFolderImage(), uniqid().''.$imageUrl->getClientOriginalName());
-            $imageForBdd->setUrl( uniqid().''.$imageUrl->getClientOriginalName());
+            $newFileName = uniqid().''.$imageUrl->getClientOriginalName();
+            $imageUrl->move('images/restaurants/'.$resto->getSlugFolderImage(), $newFileName);
+            $imageForBdd->setUrl( $newFileName);
             $imageForBdd->setIdEtablissement($resto);
             $entityManager->persist($imageForBdd);
         }
@@ -240,13 +242,13 @@ class EtablissementCrudController extends AbstractCrudController
             $dispoMardi->setNomJour($mardi);
             $dispoMardi->setRestaurant($resto);
             if (in_array('midi', $entityInstance->getDispoMardi(), true)  && in_array('soir', $entityInstance->getDispoMardi(), true)){
-                $dispoLundi->setDispoOuverture($fullService);
+                $dispoMardi->setDispoOuverture($fullService);
             } elseif (!in_array('midi', $entityInstance->getDispoMardi(), true)   && in_array('soir', $entityInstance->getDispoMardi(), true)) {
-                $dispoLundi->setDispoOuverture($onlyDinner);
+                $dispoMardi->setDispoOuverture($onlyDinner);
             } elseif (in_array('midi', $entityInstance->getDispoMardi(), true) && !in_array('soir', $entityInstance->getDispoMardi(), true) ) {
-                $dispoLundi->setDispoOuverture($onlyLunch);
+                $dispoMardi->setDispoOuverture($onlyLunch);
             } else {
-                $dispoLundi->setDispoOuverture($anyService);
+                $dispoMardi->setDispoOuverture($anyService);
             }
             $entityManager->persist($dispoMardi);
 
@@ -254,13 +256,13 @@ class EtablissementCrudController extends AbstractCrudController
             $dispoMercredi->setNomJour($mercredi);
             $dispoMercredi->setRestaurant($resto);
             if (in_array('midi', $entityInstance->getDispoMercredi(), true)  && in_array('soir', $entityInstance->getDispoMercredi(), true)){
-                $dispoLundi->setDispoOuverture($fullService);
+                $dispoMercredi->setDispoOuverture($fullService);
             } elseif (!in_array('midi', $entityInstance->getDispoMercredi(), true)   && in_array('soir', $entityInstance->getDispoMercredi(), true)) {
-                $dispoLundi->setDispoOuverture($onlyDinner);
+                $dispoMercredi->setDispoOuverture($onlyDinner);
             } elseif (in_array('midi', $entityInstance->getDispoMercredi(), true) && !in_array('soir', $entityInstance->getDispoMercredi(), true) ) {
-                $dispoLundi->setDispoOuverture($onlyLunch);
+                $dispoMercredi->setDispoOuverture($onlyLunch);
             } else {
-                $dispoLundi->setDispoOuverture($anyService);
+                $dispoMercredi->setDispoOuverture($anyService);
             }
             $entityManager->persist($dispoMercredi);
 
@@ -268,13 +270,13 @@ class EtablissementCrudController extends AbstractCrudController
             $dispoJeudi->setNomJour($jeudi);
             $dispoJeudi->setRestaurant($resto);
             if (in_array('midi', $entityInstance->getDispoJeudi(), true)  && in_array('soir', $entityInstance->getDispoJeudi(), true)){
-                $dispoLundi->setDispoOuverture($fullService);
+                $dispoJeudi->setDispoOuverture($fullService);
             } elseif (!in_array('midi', $entityInstance->getDispoJeudi(), true)   && in_array('soir', $entityInstance->getDispoJeudi(), true)) {
-                $dispoLundi->setDispoOuverture($onlyDinner);
+                $dispoJeudi->setDispoOuverture($onlyDinner);
             } elseif (in_array('midi', $entityInstance->getDispoJeudi(), true) && !in_array('soir', $entityInstance->getDispoJeudi(), true) ) {
-                $dispoLundi->setDispoOuverture($onlyLunch);
+                $dispoJeudi->setDispoOuverture($onlyLunch);
             } else {
-                $dispoLundi->setDispoOuverture($anyService);
+                $dispoJeudi->setDispoOuverture($anyService);
             }
             $entityManager->persist($dispoJeudi);
 
@@ -282,13 +284,13 @@ class EtablissementCrudController extends AbstractCrudController
             $dispoVendredi->setNomJour($vendredi);
             $dispoVendredi->setRestaurant($resto);
             if (in_array('midi', $entityInstance->getDispoVendredi(), true)  && in_array('soir', $entityInstance->getDispoVendredi(), true)){
-                $dispoLundi->setDispoOuverture($fullService);
+                $dispoVendredi->setDispoOuverture($fullService);
             } elseif (!in_array('midi', $entityInstance->getDispoVendredi(), true)   && in_array('soir', $entityInstance->getDispoVendredi(), true)) {
-                $dispoLundi->setDispoOuverture($onlyDinner);
+                $dispoVendredi->setDispoOuverture($onlyDinner);
             } elseif (in_array('midi', $entityInstance->getDispoVendredi(), true) && !in_array('soir', $entityInstance->getDispoVendredi(), true) ) {
-                $dispoLundi->setDispoOuverture($onlyLunch);
+                $dispoVendredi->setDispoOuverture($onlyLunch);
             } else {
-                $dispoLundi->setDispoOuverture($anyService);
+                $dispoVendredi->setDispoOuverture($anyService);
             }
             $entityManager->persist($dispoVendredi);
 
@@ -319,9 +321,161 @@ class EtablissementCrudController extends AbstractCrudController
                 $dispoDimanche->setDispoOuverture($anyService);
             }
             $entityManager->persist($dispoDimanche);
-
         $entityManager->flush();
         }
+    }
+
+
+    public function updateEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    {
+        if ($entityInstance instanceof Etablissement){
+
+//            if (!file_exists($this->getParameter('kernel.project_dir').'\\public\\images\\restaurants\\'.$entityInstance->getSlugFolderImage().'\\'.$entityInstance->getSlugMenu())){
+//                if (!is_dir($this->getParameter('kernel.project_dir').'\\public\\images\\restaurants\\'.$entityInstance->getSlugFolderImage())){
+//                    mkdir($this->getParameter('kernel.project_dir').'\\public\\images\\restaurants\\'.$entityInstance->getSlugFolderImage());
+//                }
+//                rename($this->getParameter('kernel.project_dir').'\\public\\images\\restaurants\\'.$entityInstance->getSlugMenu(), $this->getParameter('kernel.project_dir').'\\public\\images\\restaurants\\'.$entityInstance->getSlugFolderImage().'\\'.$entityInstance->getSlugMenu());
+//            }
+
+            if (empty($entityInstance->getSlugMenu())){
+                $entityInstance->setSlugMenu($entityInstance->getOldSlugMenu());
+            }
+
+            // J'ajoute les images
+            foreach ($entityInstance->getOldImageFile() as $oldImageUrl){
+                $imageForBdd = new ImagesRestaurants();
+                $imageForBdd->setUrl($oldImageUrl);
+                $imageForBdd->setIdEtablissement($entityInstance);
+                $entityManager->persist($imageForBdd);
+            }
+            $entityManager->persist($entityInstance);
+
+            foreach ($entityInstance->getImageFile() as $imageUrl){
+                $imageForBdd = new ImagesRestaurants();
+                $newFileName = uniqid().''.$imageUrl->getClientOriginalName();
+                $imageUrl->move('images/restaurants/'.$entityInstance->getSlugFolderImage(), $newFileName);
+                $imageForBdd->setUrl( $newFileName);
+                $imageForBdd->setIdEtablissement($entityInstance);
+                $entityManager->persist($imageForBdd);
+            }
+
+
+            // J'ajout les disponnibiltés d'ouverture
+            //Pour ça je recup d'abord mes 4 dispo possible
+            $fullService = $this->getDoctrine()->getRepository(DispoOuverture::class)->findOneBy(['service_midi'=>true, 'service_soir'=>true]);
+            $anyService = $this->getDoctrine()->getRepository(DispoOuverture::class)->findOneBy(['service_midi'=>false, 'service_soir'=>false]);
+            $onlyLunch = $this->getDoctrine()->getRepository(DispoOuverture::class)->findOneBy(['service_midi'=>true, 'service_soir'=>false]);
+            $onlyDinner = $this->getDoctrine()->getRepository(DispoOuverture::class)->findOneBy(['service_midi'=>false, 'service_soir'=>true]);
+            // Puis je récup également mes 7 jours de la semaine
+            $lundi = $this->getDoctrine()->getRepository(JourSemaine::class)->findOneBy(['nom'=>'lundi']);
+            $mardi = $this->getDoctrine()->getRepository(JourSemaine::class)->findOneBy(['nom'=>'mardi']);
+            $mercredi = $this->getDoctrine()->getRepository(JourSemaine::class)->findOneBy(['nom'=>'mercredi']);
+            $jeudi = $this->getDoctrine()->getRepository(JourSemaine::class)->findOneBy(['nom'=>'jeudi']);
+            $vendredi = $this->getDoctrine()->getRepository(JourSemaine::class)->findOneBy(['nom'=>'vendredi']);
+            $samedi = $this->getDoctrine()->getRepository(JourSemaine::class)->findOneBy(['nom'=>'samedi']);
+            $dimanche = $this->getDoctrine()->getRepository(JourSemaine::class)->findOneBy(['nom'=>'dimanche']);
+
+            // Je peux maintenant ajouté mes dispo
+
+            $dispoLundi = $this->getDoctrine()->getRepository(RelationRestoJourDispo::class)->findOneBy(['restaurant'=>$entityInstance->getId(),'nomJour'=>$lundi->getId()]);
+            if (in_array('midi', $entityInstance->getDispoLundi(), true)  && in_array('soir', $entityInstance->getDispoLundi(), true)){
+                $dispoLundi->setDispoOuverture($fullService);
+            } elseif (!in_array('midi', $entityInstance->getDispoLundi(), true)   && in_array('soir', $entityInstance->getDispoLundi(), true)) {
+                $dispoLundi->setDispoOuverture($onlyDinner);
+            } elseif (in_array('midi', $entityInstance->getDispoLundi(), true) && !in_array('soir', $entityInstance->getDispoLundi(), true) ) {
+                $dispoLundi->setDispoOuverture($onlyLunch);
+            } else {
+                $dispoLundi->setDispoOuverture($anyService);
+            }
+            $entityManager->persist($dispoLundi);
+
+            $dispoMardi = $this->getDoctrine()->getRepository(RelationRestoJourDispo::class)->findOneBy(['restaurant'=>$entityInstance->getId(),'nomJour'=>$mardi->getId()]);
+
+            if (in_array('midi', $entityInstance->getDispoMardi(), true)  && in_array('soir', $entityInstance->getDispoMardi(), true)){
+                $dispoMardi->setDispoOuverture($fullService);
+            } elseif (!in_array('midi', $entityInstance->getDispoMardi(), true)   && in_array('soir', $entityInstance->getDispoMardi(), true)) {
+                $dispoMardi->setDispoOuverture($onlyDinner);
+            } elseif (in_array('midi', $entityInstance->getDispoMardi(), true) && !in_array('soir', $entityInstance->getDispoMardi(), true) ) {
+                $dispoMardi->setDispoOuverture($onlyLunch);
+            } else {
+                $dispoMardi->setDispoOuverture($anyService);
+            }
+            $entityManager->persist($dispoMardi);
+
+            $dispoMercredi = $this->getDoctrine()->getRepository(RelationRestoJourDispo::class)->findOneBy(['restaurant'=>$entityInstance->getId(),'nomJour'=>$mercredi->getId()]);
+            if (in_array('midi', $entityInstance->getDispoMercredi(), true)  && in_array('soir', $entityInstance->getDispoMercredi(), true)){
+                $dispoMercredi->setDispoOuverture($fullService);
+            } elseif (!in_array('midi', $entityInstance->getDispoMercredi(), true)   && in_array('soir', $entityInstance->getDispoMercredi(), true)) {
+                $dispoMercredi->setDispoOuverture($onlyDinner);
+            } elseif (in_array('midi', $entityInstance->getDispoMercredi(), true) && !in_array('soir', $entityInstance->getDispoMercredi(), true) ) {
+                $dispoMercredi->setDispoOuverture($onlyLunch);
+            } else {
+                $dispoMercredi->setDispoOuverture($anyService);
+            }
+            $entityManager->persist($dispoMercredi);
+
+            $dispoJeudi = $this->getDoctrine()->getRepository(RelationRestoJourDispo::class)->findOneBy(['restaurant'=>$entityInstance->getId(),'nomJour'=>$jeudi->getId()]);
+            if (in_array('midi', $entityInstance->getDispoJeudi(), true)  && in_array('soir', $entityInstance->getDispoJeudi(), true)){
+                $dispoJeudi->setDispoOuverture($fullService);
+            } elseif (!in_array('midi', $entityInstance->getDispoJeudi(), true)   && in_array('soir', $entityInstance->getDispoJeudi(), true)) {
+                $dispoJeudi->setDispoOuverture($onlyDinner);
+            } elseif (in_array('midi', $entityInstance->getDispoJeudi(), true) && !in_array('soir', $entityInstance->getDispoJeudi(), true) ) {
+                $dispoJeudi->setDispoOuverture($onlyLunch);
+            } else {
+                $dispoJeudi->setDispoOuverture($anyService);
+            }
+            $entityManager->persist($dispoJeudi);
+
+            $dispoVendredi = $this->getDoctrine()->getRepository(RelationRestoJourDispo::class)->findOneBy(['restaurant'=>$entityInstance->getId(),'nomJour'=>$vendredi->getId()]);
+            if (in_array('midi', $entityInstance->getDispoVendredi(), true)  && in_array('soir', $entityInstance->getDispoVendredi(), true)){
+                $dispoVendredi->setDispoOuverture($fullService);
+            } elseif (!in_array('midi', $entityInstance->getDispoVendredi(), true)   && in_array('soir', $entityInstance->getDispoVendredi(), true)) {
+                $dispoVendredi->setDispoOuverture($onlyDinner);
+            } elseif (in_array('midi', $entityInstance->getDispoVendredi(), true) && !in_array('soir', $entityInstance->getDispoVendredi(), true) ) {
+                $dispoVendredi->setDispoOuverture($onlyLunch);
+            } else {
+                $dispoVendredi->setDispoOuverture($anyService);
+            }
+            $entityManager->persist($dispoVendredi);
+
+            $dispoSamedi = $this->getDoctrine()->getRepository(RelationRestoJourDispo::class)->findOneBy(['restaurant'=>$entityInstance->getId(),'nomJour'=>$samedi->getId()]);
+            if (in_array('midi', $entityInstance->getDispoSamedi(), true)  && in_array('soir', $entityInstance->getDispoSamedi(), true)){
+                $dispoSamedi->setDispoOuverture($fullService);
+            } elseif (!in_array('midi', $entityInstance->getDispoSamedi(), true)   && in_array('soir', $entityInstance->getDispoSamedi(), true)) {
+                $dispoSamedi->setDispoOuverture($onlyDinner);
+            } elseif (in_array('midi', $entityInstance->getDispoSamedi(), true) && !in_array('soir', $entityInstance->getDispoSamedi(), true) ) {
+                $dispoSamedi->setDispoOuverture($onlyLunch);
+            } else {
+                $dispoSamedi->setDispoOuverture($anyService);
+            }
+            $entityManager->persist($dispoSamedi);
+
+            $dispoDimanche = $this->getDoctrine()->getRepository(RelationRestoJourDispo::class)->findOneBy(['restaurant'=>$entityInstance->getId(),'nomJour'=>$dimanche->getId()]);
+            if (in_array('midi', $entityInstance->getDispoDimanche(), true)  && in_array('soir', $entityInstance->getDispoDimanche(), true)){
+                $dispoDimanche->setDispoOuverture($fullService);
+            } elseif (!in_array('midi', $entityInstance->getDispoDimanche(), true)   && in_array('soir', $entityInstance->getDispoDimanche(), true)) {
+                $dispoDimanche->setDispoOuverture($onlyDinner);
+            } elseif (in_array('midi', $entityInstance->getDispoDimanche(), true) && !in_array('soir', $entityInstance->getDispoDimanche(), true) ) {
+                $dispoDimanche->setDispoOuverture($onlyLunch);
+            } else {
+                $dispoDimanche->setDispoOuverture($anyService);
+            }
+            $entityManager->persist($dispoDimanche);
+            $entityManager->flush();
+        }
+    }
+
+    public function deleteEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    {
+        foreach ($entityInstance->getImagesRestaurants() as $imgResto){
+            unlink($this->getParameter('images_restaurant').'/'.$entityInstance->getSlugFolderImage().'/'.$imgResto->getUrl());
+        }
+        unlink($this->getParameter('images_restaurant').'/'.$entityInstance->getSlugFolderImage().'/'.$entityInstance->getSlugMenu());
+        rmdir($this->getParameter('images_restaurant').'/'.$entityInstance->getSlugFolderImage());
+        dd('ici');
+        $entityManager->remove($entityInstance);
+        $entityInstance->flush();
+        dd('je passe ici');
     }
 
 }

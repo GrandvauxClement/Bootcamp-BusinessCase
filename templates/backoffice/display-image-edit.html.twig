@@ -5,12 +5,35 @@
    of the block name is the unmodified entity name #}
 {% block _Etablissement_custom_display_image_widget %}
     {# ... #}
+
     <div class="row">
         {% for image in value %}
             <div class="col-3">
                 <img src="{{asset('images/restaurants/'~image.idEtablissement.slugFolderImage~'/'~ image.url) }}" class="img-fluid">
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal{{ image.id }}">
+                    Supprimer
+                </button>
+                <div class="modal fade" id="exampleModal{{ image.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header bg-danger">
+                                <h5 class="modal-title text-white" id="exampleModalLabel">Attention !</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Etes-vous sur de vouloir supprimer cette image ?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                                <a href="{{path('delete_files', {id: image.id})}}" class="btn btn-danger">Supprimer</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
             </div>
         {% endfor %}
     </div>
-
 {% endblock %}
