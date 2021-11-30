@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Etablissement;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\AbstractQuery;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -19,22 +20,39 @@ class EtablissementRepository extends ServiceEntityRepository
         parent::__construct($registry, Etablissement::class);
     }
 
-    // /**
-    //  * @return Etablissement[] Returns an array of Etablissement objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('e')
-            ->andWhere('e.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('e.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+
+     public function search($filtres){
+
+         $query = $this->createQueryBuilder('resto')
+         ->leftJoin('resto.id_type_cuisine','tc');
+
+         if(!is_null($filtres['searchBar'])){
+            $query->where('resto.nom LIKE :search')
+                  ->orWhere('resto.code_postal LIKE :search')
+                  ->orWhere('tc.nom LIKE :search');
+
+            $query->setParameter(':search', '%'.$filtres['searchBar'].'%');
+         }
+
+         $tableTypeCuisine = $filtres['type_cuisine']->toArray();
+
+         if(count($tableTypeCuisine)){
+
+             $query->andWhere('tc IN (:type_cuisine)')
+                   ->setParameter('type_cuisine', $tableTypeCuisine);
+         }
+
+         if(!is_null($filtres['departement'])){
+             $query->andWhere('resto.code_postal LIKE :number')
+                 ->setParameter(':number', $filtres['departement'].'%');
+         }
+
+         return $query->getQuery()->getResult();
+     }
+
+ /**
+   * @return Etablissement[] Returns an array of Etablissement objects
+ */
 
     /*
     public function findOneBySomeField($value): ?Etablissement
