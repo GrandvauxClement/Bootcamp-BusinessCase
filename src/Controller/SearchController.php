@@ -19,12 +19,12 @@ class SearchController extends AbstractController
     /**
      * @Route("/search", name="search")
      */
-    public function index(Request $request): Response
+    public function index(Request $request, EtablissementRepository $etablissementRepository): Response
     {
 
         $form = $this->createForm(SearchType::class);
 
-        $results = $this->etablissementRepository->findAll();
+        $results = $etablissementRepository->findAll();
 
         $form->handleRequest($request);
 

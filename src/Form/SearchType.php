@@ -127,17 +127,20 @@ class SearchType extends AbstractType
         $builder
             ->add('searchBar', TextType::class, [
                 'required' => false,
+                'label' => false,
+                'attr' => [
+                    'placeholder' => 'Nom du restaurant'
+                ]
     ])
-            ->add('nom', EntityType::class, [
-            'class' => Etablissement::class,
-            'required' => false,
-            'choice_label' => 'nom'
-            ])
             ->add('departement', ChoiceType::class, [
                 'choices' => $departements,
             'multiple' => false,
             'expanded' => false,
-            'required' => false
+            'required' => false,
+
+                'attr' => [
+                    'placeholder' => 'Département'
+                ]
             ])
             ->add('type_cuisine', EntityType::class, [
                 'class'=> TypeCuisine::class,
@@ -148,7 +151,11 @@ class SearchType extends AbstractType
 
 
             ])
-            ->add('Recherche', SubmitType::class)
+            ->add('Recherche', SubmitType::class, [
+                'attr' => [
+                    'class' => 'btn btn-block btn-success'
+    ]
+                ])
         ;
     }
 

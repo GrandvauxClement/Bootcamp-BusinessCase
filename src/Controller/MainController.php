@@ -32,6 +32,7 @@ class MainController extends AbstractController
         ]);
     }
 
+
     /**
      * @Route("/mentions-legales", name="mentions-legales")
      */
