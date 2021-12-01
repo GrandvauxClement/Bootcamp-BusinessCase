@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Reservation;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TelephoneField;
@@ -26,6 +27,7 @@ class ReservationCrudController extends AbstractCrudController
             TextField::new('prenom', 'Saisir votre prenom'),
             TextField::new('nom', 'Saisir votre nom'),
             TelephoneField::new('num_tel', 'Votre numéro de téléphone'),
+            DateField::new('dateReservation','Date de réservation'),
             TimeField::new('heure_arrive','Votre heure d\'arrive'),
             IntegerField::new('nbre_place', 'Le nombre de place réservé'),
             AssociationField::new('id_etablissement','L\'établissement concerné'),

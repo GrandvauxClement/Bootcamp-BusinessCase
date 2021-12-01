@@ -42,6 +42,8 @@ class Reservation
      */
     private $heure_arrive;
 
+    private $stock_heure_arrive;
+
     /**
      * @ORM\Column(type="integer")
      * @Assert\NotBlank(message="Le nombre de place doit être renseigné")
@@ -65,9 +67,15 @@ class Reservation
      */
     private $id_etat_reservation;
 
-    public function __construct()
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $dateReservation;
+
+    public function __construct($etablissement)
     {
         $this->created_at = new \DateTimeImmutable('now');
+        $this->id_etablissement = $etablissement;
     }
 
     public function getId(): ?int
@@ -170,4 +178,34 @@ class Reservation
 
         return $this;
     }
+
+    public function getDateReservation(): ?\DateTimeInterface
+    {
+        return $this->dateReservation;
+    }
+
+    public function setDateReservation(\DateTimeInterface $dateReservation): self
+    {
+        $this->dateReservation = $dateReservation;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+        public function getStockHeureArrive()
+        {
+            return $this->stock_heure_arrive;
+        }
+
+      /**
+     * @param mixed $stock_heure_arrive
+     */
+    public function setStockHeureArrive($stock_heure_arrive): void
+    {
+        $this->heure_arrive = new \DateTime($stock_heure_arrive.':00');
+        $this->stock_heure_arrive = $stock_heure_arrive;
+    }
+
 }

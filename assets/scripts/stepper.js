@@ -1,3 +1,63 @@
+$(document).ready(function() {
+    // you may need to change this code if you are not using Bootstrap Datepicker
+    if ($("#reservation-view").length) {
+        let disableDay = '';
+        const nameResto = $("#reservation-title").html();
+        $.ajax({
+            url: "http://127.0.0.1:8000/reservations/getDispoDate/" + nameResto,
+            method: "GET"
+        })
+            .done(function (response) {
+                disableDay = response;
+                $('.js-datepicker').datepicker({
+                    format: 'yyyy-mm-dd',
+                    startDate: "today",
+                    daysOfWeekDisabled: disableDay.toString(),
+                });
+            })
+            .fail(function () {
+                // Si la requete echoue j'initialise quand même mon date picker sans desactiver les jours où le resto est fermé
+                $('.js-datepicker').datepicker({
+                    language: "fr",
+                    format: 'yyyy-mm-dd',
+                });
+            })
+
+        $(document).on('change', '#reservation_dateReservation', function () {
+            var $dateReservation = $('#reservation_dateReservation');
+            // ... retrieve the corresponding form.
+            var $form = $(this).closest('form');
+            // Simulate form data, but only include the selected sport value.
+            var data = {};
+            let url = $form[0].action.split('reservations')[0];
+            const date = new Date($dateReservation.val())
+            // Submit data via AJAX to the form's action path.
+            $.ajax({
+                url: url + 'reservations/getHourOpen/' + nameResto + '/' + date.getDay(),
+                method: "GET"
+            })
+                .done(function (response) {
+                    let $selectHour = $("#reservation_stock_heure_arrive");
+                    $selectHour.empty();
+                    $.each(response, function (key, value) {
+                        console.log(value.date);
+                        $selectHour.append($("<option></option>")
+                            .attr("value", value.date).text(key));
+                    });
+                })
+        });
+    }
+});
+
+
+
+// When sport gets selected ...
+$(document).ready(function () {
+
+
+})
+
+
 $(function(){
     $("#wizard").steps({
         headerTag: "h4",
@@ -32,9 +92,14 @@ $(function(){
             if ( newIndex === 3 ) {
                 $('.steps ul li:nth-child(4) a img').attr('src','../../images/stepperImages/step-done-active.png');
                 $('.actions ul').addClass('step-4');
+                $('.actions .step-4 li a[href$=\'#finish\']').attr('style','display: none;');
+                $('.actions .step-4 li:last').append('<button class="btn btn-success" type="submit" >Confirmer la réservation</button>')
+
             } else {
                 $('.steps ul li:nth-child(4) a img').attr('src','../../images/stepperImages/step-4.png');
+                $('.actions .step-4 li:last button').remove()
                 $('.actions ul').removeClass('step-4');
+
             }
             return true;
         }
@@ -78,3 +143,4 @@ $(function(){
         $button.parent().find("input").val(newVal);
     });
 })
+

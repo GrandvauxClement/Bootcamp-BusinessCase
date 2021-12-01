@@ -7,30 +7,34 @@
         <!-- Vertical Steppers -->
         <div class="col-12" >
             <div class="wrapper">
-                <form action="" id="wizard">
+                {{ form_start(form, {'attr':{'id': 'wizard'}}) }}
+{#                <form id="wizard">#}
+
                     <!-- SECTION 1 -->
                     <h4></h4>
                     <section>
                         <h3>Sélectionnez une date</h3>
-                        <div class="form-holder">
-                            <i class="far fa-calendar-alt"></i>
-                            <input type="date" class="form-control" placeholder="Sélectionnez une date" required>
-                        </div>
+{#                        <div class="form-holder">#}
+{#                            <i class="far fa-calendar-alt"></i>#}
+{#                            <input type="date" class="form-control" placeholder="Sélectionnez une date" required>#}
+{#                        </div>#}
+                        {{ form_row(form.dateReservation) }}
                     </section>
 
                     <!-- SECTION 2 -->
                     <h4></h4>
                     <section>
                         <h3>Horaires disponibles</h3>
-                        <select class="form-select" aria-label="Default select example">
-                            <option selected>Choisir un horraire disponible</option>
-                            <option value="1">12:00</option>
-                            <option value="2">12:30</option>
-                            <option value="3">13:00</option>
-                            <option value="3">19:00</option>
-                            <option value="3">19:30</option>
-                            <option value="3">20:00</option>
-                        </select>
+                        {{ form_row(form.stock_heure_arrive) }}
+{#                        <select class="form-select" aria-label="Default select example">#}
+{#                            <option selected>Choisir un horraire disponible</option>#}
+{#                            <option value="1">12:00</option>#}
+{#                            <option value="2">12:30</option>#}
+{#                            <option value="3">13:00</option>#}
+{#                            <option value="3">19:00</option>#}
+{#                            <option value="3">19:30</option>#}
+{#                            <option value="3">20:00</option>#}
+{#                        </select>#}
 
                     </section>
 
@@ -38,35 +42,32 @@
                     <h4></h4>
                     <section>
                         <h3 style="margin-bottom: 16px;">Nombre de personnes concerné</h3>
-                        <select class="form-select" aria-label="Default select example">
-                            <option selected>Choisir le nombre de personnes</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="3">4</option>
-                            <option value="3">5</option>
-                            <option value="3">6</option>
-                        </select>
+                        {{ form_row(form.nbre_place) }}
                     </section>
 
                     <!-- SECTION 4 -->
                     <h4></h4>
                     <section>
                         <h3>Informations complémentaire</h3>
-                        <div class="form-row">
-                            <div class="form-holder">
-                                <i class="fas fa-user-alt"></i>
-                                <input type="text" class="form-control" placeholder="Votre nom et prénom" required>
-                            </div>
-                            <div class="form-holder">
-                                <i class="fas fa-mobile-alt"></i>
-                                <input type="text" class="form-control" placeholder="Votre numéro de téléphone" required>
-                            </div>
+                        <div class="form-row d-flex justify-content-around ">
+                            {{ form_row(form.nom) }}
+                            {{ form_row(form.prenom) }}
+                            {{ form_row(form.num_tel) }}
+{#                            <div class="form-holder">#}
+{#                                <i class="fas fa-user-alt"></i>#}
+{#                                <input type="text" class="form-control" placeholder="Votre nom et prénom" required>#}
+{#                            </div>#}
+{#                            <div class="form-holder">#}
+{#                                <i class="fas fa-mobile-alt"></i>#}
+{#                                <input type="text" class="form-control" placeholder="Votre numéro de téléphone" required>#}
+{#                            </div>#}
 
                         </div>
-
+{#                        {{ form_row(form.save) }}#}
                     </section>
-                </form>
+
+{#                </form>#}
+                {{ form_end(form) }}
             </div>
 
         </div>

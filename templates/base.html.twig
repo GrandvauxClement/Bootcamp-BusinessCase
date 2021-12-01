@@ -23,6 +23,12 @@
     </head>
     <body>
         {% include 'main/layout/navBar.html.twig' %}
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+
+        {% endfor %}
         <header>
             {% include 'main/layout/header.html.twig' %}
         </header>
