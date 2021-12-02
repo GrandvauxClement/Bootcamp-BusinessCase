@@ -2,7 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Etablissement;
+use App\Repository\ArticleRepository;
 use App\Repository\EtablissementRepository;
+use Doctrine\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManager;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -31,8 +34,17 @@ class MainController extends AbstractController
             'restos'=>$restos
         ]);
     }
+    /**
+     * @Route("/search", name="search", methods={"GET"})
+     */
+    public function searchengine(Request $request, EtablissementRepository  $etablissementRepository): Response
+    {
 
+        $terms = $request->get('terms') ?? '';
+        $restos = $etablissementRepository->search($terms);
+        return new JsonResponse($restos);
 
+    }
     /**
      * @Route("/mentions-legales", name="mentions-legales")
      */

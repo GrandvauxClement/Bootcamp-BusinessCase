@@ -3,3 +3,4 @@ import 'jquery';
 import './jquery.steps'
 import "mdb-ui-kit";
 import "./stepper"
+import "./search"

@@ -21,34 +21,21 @@ class EtablissementRepository extends ServiceEntityRepository
     }
 
 
-     public function search($filtres){
+     public function search(string $terms)
+     {
 
-         $query = $this->createQueryBuilder('resto')
-         ->leftJoin('resto.id_type_cuisine','tc');
+         return $this->createQueryBuilder('resto')
+//             ->leftJoin('resto.id_type_cuisine', 'tc')
 
-         if(!is_null($filtres['searchBar'])){
-            $query->where('resto.nom LIKE :search')
-                  ->orWhere('resto.code_postal LIKE :search')
-                  ->orWhere('tc.nom LIKE :search');
+                ->where('resto.nom LIKE :terms')
+                ->setParameter('terms', '%'.$terms.'%')
+//                 ->orWhere('resto.code_postal LIKE :search')
+//                 ->orWhere('tc.nom LIKE :search')
+                 ->getQuery()
+                 ->getResult(AbstractQuery::HYDRATE_ARRAY);
 
-            $query->setParameter(':search', '%'.$filtres['searchBar'].'%');
          }
 
-         $tableTypeCuisine = $filtres['type_cuisine']->toArray();
-
-         if(count($tableTypeCuisine)){
-
-             $query->andWhere('tc IN (:type_cuisine)')
-                   ->setParameter('type_cuisine', $tableTypeCuisine);
-         }
-
-         if(!is_null($filtres['departement'])){
-             $query->andWhere('resto.code_postal LIKE :number')
-                 ->setParameter(':number', $filtres['departement'].'%');
-         }
-
-         return $query->getQuery()->getResult();
-     }
 
  /**
    * @return Etablissement[] Returns an array of Etablissement objects

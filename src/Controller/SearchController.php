@@ -17,7 +17,7 @@ class SearchController extends AbstractController
         $this->etablissementRepository = $er;
 }
     /**
-     * @Route("/search", name="search")
+     * @Route("/nsearch", name="nsearch")
      */
     public function index(Request $request, EtablissementRepository $etablissementRepository): Response
     {
