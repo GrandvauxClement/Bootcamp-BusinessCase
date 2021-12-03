@@ -32,11 +32,11 @@ class ReservationFixtures extends Fixture implements DependentFixtureInterface
         for ($i=0; $i<200; $i++ ){
             $randResto = $restaurants[array_rand($restaurants,1 )];
 
-            $reservation = new Reservation($randResto);
+            $reservation = new Reservation($randResto, new \DateTimeImmutable($faker->dateTimeBetween('-3 week', 'now')->format('Y-m-d')));
 
             $reservation->setNom($faker->lastName);
             $reservation->setPrenom($faker->firstName);
-            $date = $faker->dateTimeBetween('now', '+3 week');
+            $date = $faker->dateTimeBetween('-2 week', '+3 week');
             $dateValide = false;
             $nomJour = $this->getNameOfDay($date->format('w'));
             while (!$dateValide) {

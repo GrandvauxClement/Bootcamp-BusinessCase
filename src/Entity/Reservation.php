@@ -72,9 +72,14 @@ class Reservation
      */
     private $dateReservation;
 
-    public function __construct($etablissement)
+    public function __construct($etablissement, $date = null)
     {
-        $this->created_at = new \DateTimeImmutable('now');
+        if (is_null($date)){
+            $this->created_at = new \DateTimeImmutable('now');
+        } else {
+            $this->created_at = $date;
+        }
+
         $this->id_etablissement = $etablissement;
     }
 
