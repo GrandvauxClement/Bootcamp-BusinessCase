@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Reservation;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
@@ -35,4 +36,11 @@ class ReservationCrudController extends AbstractCrudController
         ];
     }
 
+    public function configureFilters(Filters $filters): Filters
+    {
+        return $filters
+            ->add('id_etablissement')
+            ->add('dateReservation')
+        ;
+    }
 }

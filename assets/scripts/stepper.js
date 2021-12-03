@@ -1,10 +1,14 @@
 $(document).ready(function() {
     // you may need to change this code if you are not using Bootstrap Datepicker
-    if ($("#reservation-view").length) {
+    const idReservationPage = $("#reservation-view");
+    if (idReservationPage.length) {
         let disableDay = '';
         const nameResto = $("#reservation-title").html();
+        const $form = idReservationPage.closest('form');
+        // Simulate form data, but only include the selected sport value.
+        let url = $form.prevObject[0].baseURI.split('reservations')[0];
         $.ajax({
-            url: "http://127.0.0.1:8000/reservations/getDispoDate/" + nameResto,
+            url: url + "reservations/getDispoDate/" + nameResto,
             method: "GET"
         })
             .done(function (response) {
@@ -26,10 +30,7 @@ $(document).ready(function() {
         $(document).on('change', '#reservation_dateReservation', function () {
             var $dateReservation = $('#reservation_dateReservation');
             // ... retrieve the corresponding form.
-            var $form = $(this).closest('form');
-            // Simulate form data, but only include the selected sport value.
-            var data = {};
-            let url = $form[0].action.split('reservations')[0];
+
             const date = new Date($dateReservation.val())
             // Submit data via AJAX to the form's action path.
             $.ajax({

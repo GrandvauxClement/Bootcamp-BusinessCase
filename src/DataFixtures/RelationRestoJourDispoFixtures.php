@@ -356,6 +356,223 @@ class RelationRestoJourDispoFixtures extends Fixture implements DependentFixture
         $dispoChamasTacosLyonDimanche->setDispoOuverture($this->getReference('fullDispo'));
         $manager->persist($dispoChamasTacosLyonDimanche);
 
+
+
+        // ******************  Dispo par jour pour le resto l'Affreux Jojo  ****************************************
+        $dispolAffreuxJojoLundi = new RelationRestoJourDispo();
+        $dispolAffreuxJojoLundi->setNomJour($this->getReference('lundi'));
+        $dispolAffreuxJojoLundi->setRestaurant($this->getReference('lAffreuxJojo'));
+        $dispolAffreuxJojoLundi->setDispoOuverture($this->getReference('onlyLunchDispo'));
+        $manager->persist($dispolAffreuxJojoLundi);
+
+        $dispolAffreuxJojoMardi = new RelationRestoJourDispo();
+        $dispolAffreuxJojoMardi->setNomJour($this->getReference('mardi'));
+        $dispolAffreuxJojoMardi->setRestaurant($this->getReference('lAffreuxJojo'));
+        $dispolAffreuxJojoMardi->setDispoOuverture($this->getReference('onlyDinerDispo'));
+        $manager->persist($dispolAffreuxJojoMardi);
+
+        $dispolAffreuxJojoMercredi = new RelationRestoJourDispo();
+        $dispolAffreuxJojoMercredi->setNomJour($this->getReference('mercredi'));
+        $dispolAffreuxJojoMercredi->setRestaurant($this->getReference('lAffreuxJojo'));
+        $dispolAffreuxJojoMercredi->setDispoOuverture($this->getReference('fullDispo'));
+        $manager->persist($dispolAffreuxJojoMercredi);
+
+        $dispolAffreuxJojoJeudi = new RelationRestoJourDispo();
+        $dispolAffreuxJojoJeudi->setNomJour($this->getReference('jeudi'));
+        $dispolAffreuxJojoJeudi->setRestaurant($this->getReference('lAffreuxJojo'));
+        $dispolAffreuxJojoJeudi->setDispoOuverture($this->getReference('fullDispo'));
+        $manager->persist($dispolAffreuxJojoJeudi);
+
+        $dispolAffreuxJojoVendredi = new RelationRestoJourDispo();
+        $dispolAffreuxJojoVendredi->setNomJour($this->getReference('vendredi'));
+        $dispolAffreuxJojoVendredi->setRestaurant($this->getReference('lAffreuxJojo'));
+        $dispolAffreuxJojoVendredi->setDispoOuverture($this->getReference('fullDispo'));
+        $manager->persist($dispolAffreuxJojoVendredi);
+
+        $dispolAffreuxJojoSamedi = new RelationRestoJourDispo();
+        $dispolAffreuxJojoSamedi->setNomJour($this->getReference('samedi'));
+        $dispolAffreuxJojoSamedi->setRestaurant($this->getReference('lAffreuxJojo'));
+        $dispolAffreuxJojoSamedi->setDispoOuverture($this->getReference('fullDispo'));
+        $manager->persist($dispolAffreuxJojoSamedi);
+
+        $dispolAffreuxJojoDimanche = new RelationRestoJourDispo();
+        $dispolAffreuxJojoDimanche->setNomJour($this->getReference('dimanche'));
+        $dispolAffreuxJojoDimanche->setRestaurant($this->getReference('lAffreuxJojo'));
+        $dispolAffreuxJojoDimanche->setDispoOuverture($this->getReference('onlyLunchDispo'));
+        $manager->persist($dispolAffreuxJojoDimanche);
+
+        // ******************  Dispo par jour pour le resto le Neuvième Art  ****************************************
+        $dispoleNeuviemeArtLundi = new RelationRestoJourDispo();
+        $dispoleNeuviemeArtLundi->setNomJour($this->getReference('lundi'));
+        $dispoleNeuviemeArtLundi->setRestaurant($this->getReference('leNeuviemeArt'));
+        $dispoleNeuviemeArtLundi->setDispoOuverture($this->getReference('fullDispo'));
+        $manager->persist($dispoleNeuviemeArtLundi);
+
+        $dispoleNeuviemeArtMardi = new RelationRestoJourDispo();
+        $dispoleNeuviemeArtMardi->setNomJour($this->getReference('mardi'));
+        $dispoleNeuviemeArtMardi->setRestaurant($this->getReference('leNeuviemeArt'));
+        $dispoleNeuviemeArtMardi->setDispoOuverture($this->getReference('onlyDinerDispo'));
+        $manager->persist($dispoleNeuviemeArtMardi);
+
+        $dispoleNeuviemeArtMercredi = new RelationRestoJourDispo();
+        $dispoleNeuviemeArtMercredi->setNomJour($this->getReference('mercredi'));
+        $dispoleNeuviemeArtMercredi->setRestaurant($this->getReference('leNeuviemeArt'));
+        $dispoleNeuviemeArtMercredi->setDispoOuverture($this->getReference('fullDispo'));
+        $manager->persist($dispoleNeuviemeArtMercredi);
+
+        $dispoleNeuviemeArtJeudi = new RelationRestoJourDispo();
+        $dispoleNeuviemeArtJeudi->setNomJour($this->getReference('jeudi'));
+        $dispoleNeuviemeArtJeudi->setRestaurant($this->getReference('leNeuviemeArt'));
+        $dispoleNeuviemeArtJeudi->setDispoOuverture($this->getReference('fullDispo'));
+        $manager->persist($dispoleNeuviemeArtJeudi);
+
+        $dispoleNeuviemeArtVendredi = new RelationRestoJourDispo();
+        $dispoleNeuviemeArtVendredi->setNomJour($this->getReference('vendredi'));
+        $dispoleNeuviemeArtVendredi->setRestaurant($this->getReference('leNeuviemeArt'));
+        $dispoleNeuviemeArtVendredi->setDispoOuverture($this->getReference('fullDispo'));
+        $manager->persist($dispoleNeuviemeArtVendredi);
+
+        $dispoleNeuviemeArtSamedi = new RelationRestoJourDispo();
+        $dispoleNeuviemeArtSamedi->setNomJour($this->getReference('samedi'));
+        $dispoleNeuviemeArtSamedi->setRestaurant($this->getReference('leNeuviemeArt'));
+        $dispoleNeuviemeArtSamedi->setDispoOuverture($this->getReference('fullDispo'));
+        $manager->persist($dispoleNeuviemeArtSamedi);
+
+        $dispoleNeuviemeArtDimanche = new RelationRestoJourDispo();
+        $dispoleNeuviemeArtDimanche->setNomJour($this->getReference('dimanche'));
+        $dispoleNeuviemeArtDimanche->setRestaurant($this->getReference('leNeuviemeArt'));
+        $dispoleNeuviemeArtDimanche->setDispoOuverture($this->getReference('onlyLunchDispo'));
+        $manager->persist($dispoleNeuviemeArtDimanche);
+
+        // ******************  Dispo par jour pour le resto le Dauphinoix  ****************************************
+        $dispoleDauphinoixLundi = new RelationRestoJourDispo();
+        $dispoleDauphinoixLundi->setNomJour($this->getReference('lundi'));
+        $dispoleDauphinoixLundi->setRestaurant($this->getReference('leDauphinoix'));
+        $dispoleDauphinoixLundi->setDispoOuverture($this->getReference('fullDispo'));
+        $manager->persist($dispoleDauphinoixLundi);
+
+        $dispoleDauphinoixMardi = new RelationRestoJourDispo();
+        $dispoleDauphinoixMardi->setNomJour($this->getReference('mardi'));
+        $dispoleDauphinoixMardi->setRestaurant($this->getReference('leDauphinoix'));
+        $dispoleDauphinoixMardi->setDispoOuverture($this->getReference('onlyDinerDispo'));
+        $manager->persist($dispoleDauphinoixMardi);
+
+        $dispoleDauphinoixMercredi = new RelationRestoJourDispo();
+        $dispoleDauphinoixMercredi->setNomJour($this->getReference('mercredi'));
+        $dispoleDauphinoixMercredi->setRestaurant($this->getReference('leDauphinoix'));
+        $dispoleDauphinoixMercredi->setDispoOuverture($this->getReference('fullDispo'));
+        $manager->persist($dispoleDauphinoixMercredi);
+
+        $dispoleDauphinoixJeudi = new RelationRestoJourDispo();
+        $dispoleDauphinoixJeudi->setNomJour($this->getReference('jeudi'));
+        $dispoleDauphinoixJeudi->setRestaurant($this->getReference('leDauphinoix'));
+        $dispoleDauphinoixJeudi->setDispoOuverture($this->getReference('fullDispo'));
+        $manager->persist($dispoleDauphinoixJeudi);
+
+        $dispoleDauphinoixVendredi = new RelationRestoJourDispo();
+        $dispoleDauphinoixVendredi->setNomJour($this->getReference('vendredi'));
+        $dispoleDauphinoixVendredi->setRestaurant($this->getReference('leDauphinoix'));
+        $dispoleDauphinoixVendredi->setDispoOuverture($this->getReference('fullDispo'));
+        $manager->persist($dispoleDauphinoixVendredi);
+
+        $dispoleDauphinoixSamedi = new RelationRestoJourDispo();
+        $dispoleDauphinoixSamedi->setNomJour($this->getReference('samedi'));
+        $dispoleDauphinoixSamedi->setRestaurant($this->getReference('leDauphinoix'));
+        $dispoleDauphinoixSamedi->setDispoOuverture($this->getReference('fullDispo'));
+        $manager->persist($dispoleDauphinoixSamedi);
+
+        $dispoleDauphinoixDimanche = new RelationRestoJourDispo();
+        $dispoleDauphinoixDimanche->setNomJour($this->getReference('dimanche'));
+        $dispoleDauphinoixDimanche->setRestaurant($this->getReference('leDauphinoix'));
+        $dispoleDauphinoixDimanche->setDispoOuverture($this->getReference('onlyLunchDispo'));
+        $manager->persist($dispoleDauphinoixDimanche);
+
+        // ******************  Dispo par jour pour le resto la Petite Idee  ****************************************
+        $dispolaPetiteIdeeLundi = new RelationRestoJourDispo();
+        $dispolaPetiteIdeeLundi->setNomJour($this->getReference('lundi'));
+        $dispolaPetiteIdeeLundi->setRestaurant($this->getReference('laPetiteIdee'));
+        $dispolaPetiteIdeeLundi->setDispoOuverture($this->getReference('fullDispo'));
+        $manager->persist($dispolaPetiteIdeeLundi);
+
+        $dispolaPetiteIdeeMardi = new RelationRestoJourDispo();
+        $dispolaPetiteIdeeMardi->setNomJour($this->getReference('mardi'));
+        $dispolaPetiteIdeeMardi->setRestaurant($this->getReference('laPetiteIdee'));
+        $dispolaPetiteIdeeMardi->setDispoOuverture($this->getReference('onlyDinerDispo'));
+        $manager->persist($dispolaPetiteIdeeMardi);
+
+        $dispolaPetiteIdeeMercredi = new RelationRestoJourDispo();
+        $dispolaPetiteIdeeMercredi->setNomJour($this->getReference('mercredi'));
+        $dispolaPetiteIdeeMercredi->setRestaurant($this->getReference('laPetiteIdee'));
+        $dispolaPetiteIdeeMercredi->setDispoOuverture($this->getReference('fullDispo'));
+        $manager->persist($dispolaPetiteIdeeMercredi);
+
+        $dispolaPetiteIdeeJeudi = new RelationRestoJourDispo();
+        $dispolaPetiteIdeeJeudi->setNomJour($this->getReference('jeudi'));
+        $dispolaPetiteIdeeJeudi->setRestaurant($this->getReference('laPetiteIdee'));
+        $dispolaPetiteIdeeJeudi->setDispoOuverture($this->getReference('fullDispo'));
+        $manager->persist($dispolaPetiteIdeeJeudi);
+
+        $dispolaPetiteIdeeVendredi = new RelationRestoJourDispo();
+        $dispolaPetiteIdeeVendredi->setNomJour($this->getReference('vendredi'));
+        $dispolaPetiteIdeeVendredi->setRestaurant($this->getReference('laPetiteIdee'));
+        $dispolaPetiteIdeeVendredi->setDispoOuverture($this->getReference('fullDispo'));
+        $manager->persist($dispolaPetiteIdeeVendredi);
+
+        $dispolaPetiteIdeeSamedi = new RelationRestoJourDispo();
+        $dispolaPetiteIdeeSamedi->setNomJour($this->getReference('samedi'));
+        $dispolaPetiteIdeeSamedi->setRestaurant($this->getReference('laPetiteIdee'));
+        $dispolaPetiteIdeeSamedi->setDispoOuverture($this->getReference('fullDispo'));
+        $manager->persist($dispolaPetiteIdeeSamedi);
+
+        $dispolaPetiteIdeeDimanche = new RelationRestoJourDispo();
+        $dispolaPetiteIdeeDimanche->setNomJour($this->getReference('dimanche'));
+        $dispolaPetiteIdeeDimanche->setRestaurant($this->getReference('laPetiteIdee'));
+        $dispolaPetiteIdeeDimanche->setDispoOuverture($this->getReference('onlyLunchDispo'));
+        $manager->persist($dispolaPetiteIdeeDimanche);
+
+        // ******************  Dispo par jour pour le resto l'Hambourgeois'  ****************************************
+        $dispolHambourgeoisLundi = new RelationRestoJourDispo();
+        $dispolHambourgeoisLundi->setNomJour($this->getReference('lundi'));
+        $dispolHambourgeoisLundi->setRestaurant($this->getReference('lHambourgeois'));
+        $dispolHambourgeoisLundi->setDispoOuverture($this->getReference('anyDispo'));
+        $manager->persist($dispolHambourgeoisLundi);
+
+        $dispolHambourgeoisMardi = new RelationRestoJourDispo();
+        $dispolHambourgeoisMardi->setNomJour($this->getReference('mardi'));
+        $dispolHambourgeoisMardi->setRestaurant($this->getReference('lHambourgeois'));
+        $dispolHambourgeoisMardi->setDispoOuverture($this->getReference('onlyDinerDispo'));
+        $manager->persist($dispolHambourgeoisMardi);
+
+        $dispolHambourgeoisMercredi = new RelationRestoJourDispo();
+        $dispolHambourgeoisMercredi->setNomJour($this->getReference('mercredi'));
+        $dispolHambourgeoisMercredi->setRestaurant($this->getReference('lHambourgeois'));
+        $dispolHambourgeoisMercredi->setDispoOuverture($this->getReference('fullDispo'));
+        $manager->persist($dispolHambourgeoisMercredi);
+
+        $dispolHambourgeoisJeudi = new RelationRestoJourDispo();
+        $dispolHambourgeoisJeudi->setNomJour($this->getReference('jeudi'));
+        $dispolHambourgeoisJeudi->setRestaurant($this->getReference('lHambourgeois'));
+        $dispolHambourgeoisJeudi->setDispoOuverture($this->getReference('fullDispo'));
+        $manager->persist($dispolHambourgeoisJeudi);
+
+        $dispolHambourgeoisVendredi = new RelationRestoJourDispo();
+        $dispolHambourgeoisVendredi->setNomJour($this->getReference('vendredi'));
+        $dispolHambourgeoisVendredi->setRestaurant($this->getReference('lHambourgeois'));
+        $dispolHambourgeoisVendredi->setDispoOuverture($this->getReference('fullDispo'));
+        $manager->persist($dispolHambourgeoisVendredi);
+
+        $dispolHambourgeoisSamedi = new RelationRestoJourDispo();
+        $dispolHambourgeoisSamedi->setNomJour($this->getReference('samedi'));
+        $dispolHambourgeoisSamedi->setRestaurant($this->getReference('lHambourgeois'));
+        $dispolHambourgeoisSamedi->setDispoOuverture($this->getReference('fullDispo'));
+        $manager->persist($dispolHambourgeoisSamedi);
+
+        $dispolHambourgeoisDimanche = new RelationRestoJourDispo();
+        $dispolHambourgeoisDimanche->setNomJour($this->getReference('dimanche'));
+        $dispolHambourgeoisDimanche->setRestaurant($this->getReference('lHambourgeois'));
+        $dispolHambourgeoisDimanche->setDispoOuverture($this->getReference('fullDispo'));
+        $manager->persist($dispolHambourgeoisDimanche);
+
         $manager->flush();
     }
 

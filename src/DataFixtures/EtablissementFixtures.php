@@ -317,6 +317,195 @@ class EtablissementFixtures extends Fixture implements DependentFixtureInterface
             $manager->persist($imageForBdd);
         }
 
+        //------------------ 9EME ETABLISSEMENT ----------------------------
+        $lAffreuxJojo = new Etablissement();
+        $lAffreuxJojo->setNom('L\'Affreux Jojo');
+        $lAffreuxJojo->setNumRue(61);
+        $lAffreuxJojo->setRue('Rue de la Part Dieu');
+        $lAffreuxJojo->setVille('Lyon');
+        $lAffreuxJojo->setCodePostal('69003');
+        $lAffreuxJojo->setAccepteReservation(true);
+        $lAffreuxJojo->setDescription('\'lorem ipsum At vero eos et accusamus et iusto odio dignissimos ducimus qui
+         blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint 
+         occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est 
+         laborum et dolorum fuga\'');
+        $lAffreuxJojo->setNote(4.5);
+        $lAffreuxJojo->setNbrePlaceTotal(36);
+        $lAffreuxJojo->setServiceMidiDebutTime(new \DateTime("11:30:00"));
+        $lAffreuxJojo->setServiceMidiFinTime(new \DateTime("14:30:00"));
+        $lAffreuxJojo->setServiceSoirDebutTime(new \DateTime("18:30:00"));
+        $lAffreuxJojo->setServiceSoirFinTime(new \DateTime("22:30:00"));
+        $lAffreuxJojo->setIdTypeCuisine($this->getReference('typeItalienne'));
+        $lAffreuxJojo->addTag($this->getReference('tagTraditionnelle'));
+        $lAffreuxJojo->addTag($this->getReference('tagCuisine locale'));
+        $lAffreuxJojo->setNumTelephone('+33 4 72 64 25 86');
+        $lAffreuxJojo->setSlugFolderImage('lAffreuxJojo');
+        $lAffreuxJojo->setSlugMenu('menu.png');
+        $this->addReference('lAffreuxJojo', $lAffreuxJojo);
+        // Les jour d'ouverture -> dispo
+
+        $manager->persist($lAffreuxJojo);
+        // J'ajoute les images
+
+        $lAffreuxJojoArrayImages = ['1.jpg', '2.jpg', '3.jpg', '4.jpg'];
+        foreach ($lAffreuxJojoArrayImages as $imageUrl){
+            $imageForBdd = new ImagesRestaurants();
+            $imageForBdd->setUrl($imageUrl);
+            $imageForBdd->setIdEtablissement($lAffreuxJojo);
+            $manager->persist($imageForBdd);
+        }
+
+        //------------------ 10EME ETABLISSEMENT ----------------------------
+        $leNeuviemeArt = new Etablissement();
+        $leNeuviemeArt->setNom('Le Neuvième Art');
+        $leNeuviemeArt->setNumRue(173);
+        $leNeuviemeArt->setRue('Rue Cuvier');
+        $leNeuviemeArt->setVille('Lyon');
+        $leNeuviemeArt->setCodePostal('69006');
+        $leNeuviemeArt->setAccepteReservation(true);
+        $leNeuviemeArt->setDescription('\'lorem ipsum At vero eos et accusamus et iusto odio dignissimos ducimus qui
+         blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint 
+         occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est 
+         laborum et dolorum fuga\'');
+        $leNeuviemeArt->setNote(4.8);
+        $leNeuviemeArt->setNbrePlaceTotal(50);
+        $leNeuviemeArt->setServiceMidiDebutTime(new \DateTime("11:30:00"));
+        $leNeuviemeArt->setServiceMidiFinTime(new \DateTime("13:30:00"));
+        $leNeuviemeArt->setServiceSoirDebutTime(new \DateTime("18:30:00"));
+        $leNeuviemeArt->setServiceSoirFinTime(new \DateTime("22:00:00"));
+        $leNeuviemeArt->setIdTypeCuisine($this->getReference('typeFrançaise'));
+        $leNeuviemeArt->addTag($this->getReference('tagGastronomique'));
+        $leNeuviemeArt->addTag($this->getReference('tagRéunions d\'affaires'));
+        $leNeuviemeArt->setNumTelephone('+33 4 72 74 12 74');
+        $leNeuviemeArt->setSlugFolderImage('leNeuviemeArt');
+        $leNeuviemeArt->setSlugMenu(null);
+        $this->addReference('leNeuviemeArt', $leNeuviemeArt);
+        // Les jour d'ouverture -> dispo
+
+        $manager->persist($leNeuviemeArt);
+        // J'ajoute les images
+
+        $leNeuviemeArtArrayImages = ['1.jpg', '2.jpg', '3.jpg', '4.jpg'];
+        foreach ($leNeuviemeArtArrayImages as $imageUrl){
+            $imageForBdd = new ImagesRestaurants();
+            $imageForBdd->setUrl($imageUrl);
+            $imageForBdd->setIdEtablissement($leNeuviemeArt);
+            $manager->persist($imageForBdd);
+        }
+
+        //------------------ 11EME ETABLISSEMENT ----------------------------
+        $leDauphinoix = new Etablissement();
+        $leDauphinoix->setNom('Le Dauphinoix');
+        $leDauphinoix->setNumRue(11);
+        $leDauphinoix->setRue('Rue Bayard');
+        $leDauphinoix->setVille('Grenoble');
+        $leDauphinoix->setCodePostal('38000');
+        $leDauphinoix->setAccepteReservation(true);
+        $leDauphinoix->setDescription('\'lorem ipsum At vero eos et accusamus et iusto odio dignissimos ducimus qui
+         blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint 
+         occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est 
+         laborum et dolorum fuga\'');
+        $leDauphinoix->setNote(4.2);
+        $leDauphinoix->setNbrePlaceTotal(70);
+        $leDauphinoix->setServiceMidiDebutTime(new \DateTime("11:30:00"));
+        $leDauphinoix->setServiceMidiFinTime(new \DateTime("14:30:00"));
+        $leDauphinoix->setServiceSoirDebutTime(new \DateTime("18:30:00"));
+        $leDauphinoix->setServiceSoirFinTime(new \DateTime("22:00:00"));
+        $leDauphinoix->setIdTypeCuisine($this->getReference('typeFrançaise'));
+        $leDauphinoix->addTag($this->getReference('tagGastronomique'));
+        $leDauphinoix->addTag($this->getReference('tagCuisine locale'));
+        $leDauphinoix->setNumTelephone('+33 4 76 25 38 38');
+        $leDauphinoix->setSlugFolderImage('leDauphinoix');
+        $leDauphinoix->setSlugMenu('menu.jpg');
+        $this->addReference('leDauphinoix', $leDauphinoix);
+        // Les jour d'ouverture -> dispo
+
+        $manager->persist($leDauphinoix);
+        // J'ajoute les images
+
+        $leDauphinoixArrayImages = ['1.jpg', '2.jpg', '3.jpg', '4.jpg'];
+        foreach ($leDauphinoixArrayImages as $imageUrl){
+            $imageForBdd = new ImagesRestaurants();
+            $imageForBdd->setUrl($imageUrl);
+            $imageForBdd->setIdEtablissement($leDauphinoix);
+            $manager->persist($imageForBdd);
+        }
+
+        //------------------ 12EME ETABLISSEMENT ----------------------------
+        $laPetiteIdee = new Etablissement();
+        $laPetiteIdee->setNom('La Petite Idee');
+        $laPetiteIdee->setNumRue(7);
+        $laPetiteIdee->setRue('Cours Jean Jaures');
+        $laPetiteIdee->setVille('Grenoble');
+        $laPetiteIdee->setCodePostal('38000');
+        $laPetiteIdee->setAccepteReservation(true);
+        $laPetiteIdee->setDescription('\'lorem ipsum At vero eos et accusamus et iusto odio dignissimos ducimus qui
+         blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint 
+         occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est 
+         laborum et dolorum fuga\'');
+        $laPetiteIdee->setNote(3.5);
+        $laPetiteIdee->setNbrePlaceTotal(40);
+        $laPetiteIdee->setServiceMidiDebutTime(new \DateTime("11:30:00"));
+        $laPetiteIdee->setServiceMidiFinTime(new \DateTime("14:00:00"));
+        $laPetiteIdee->setServiceSoirDebutTime(new \DateTime("18:30:00"));
+        $laPetiteIdee->setServiceSoirFinTime(new \DateTime("22:30:00"));
+        $laPetiteIdee->setIdTypeCuisine($this->getReference('typeFrançaise'));
+        $laPetiteIdee->addTag($this->getReference('tagTraditionnelle'));
+        $laPetiteIdee->addTag($this->getReference('tagCuisine locale'));
+        $laPetiteIdee->setNumTelephone('+33 4 76 47 52 95');
+        $laPetiteIdee->setSlugFolderImage('laPetiteIdee');
+        $laPetiteIdee->setSlugMenu('menu.jpg');
+        $this->addReference('laPetiteIdee', $laPetiteIdee);
+        // Les jour d'ouverture -> dispo
+
+        $manager->persist($laPetiteIdee);
+        // J'ajoute les images
+
+        $laPetiteIdeeArrayImages = ['1.jpg', '2.jpg', '3.jpg', '4.jpg'];
+        foreach ($laPetiteIdeeArrayImages as $imageUrl){
+            $imageForBdd = new ImagesRestaurants();
+            $imageForBdd->setUrl($imageUrl);
+            $imageForBdd->setIdEtablissement($laPetiteIdee);
+            $manager->persist($imageForBdd);
+        }
+
+        //------------------ 13EME ETABLISSEMENT ----------------------------
+        $lHambourgeois = new Etablissement();
+        $lHambourgeois->setNom('L\'Hambourgeois');
+        $lHambourgeois->setNumRue(11);
+        $lHambourgeois->setRue('rue Bayard');
+        $lHambourgeois->setVille('Grenoble');
+        $lHambourgeois->setCodePostal('38000');
+        $lHambourgeois->setAccepteReservation(true);
+        $lHambourgeois->setDescription('\'lorem ipsum At vero eos et accusamus et iusto odio dignissimos ducimus qui
+         blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint 
+         occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est 
+         laborum et dolorum fuga\'');
+        $lHambourgeois->setNote(3.9);
+        $lHambourgeois->setNbrePlaceTotal(35);
+        $lHambourgeois->setServiceMidiDebutTime(new \DateTime("12:00:00"));
+        $lHambourgeois->setServiceMidiFinTime(new \DateTime("14:00:00"));
+        $lHambourgeois->setServiceSoirDebutTime(new \DateTime("18:30:00"));
+        $lHambourgeois->setServiceSoirFinTime(new \DateTime("22:30:00"));
+        $lHambourgeois->setIdTypeCuisine($this->getReference('typeFrançaise'));
+        $lHambourgeois->addTag($this->getReference('tagFast-Food'));
+        $lHambourgeois->addTag($this->getReference('tagBurgers'));
+        $lHambourgeois->setNumTelephone('+33 4 76 54 22 58');
+        $lHambourgeois->setSlugFolderImage('lHambourgeois');
+        $lHambourgeois->setSlugMenu('menu.jpg');
+        $this->addReference('lHambourgeois', $lHambourgeois);
+        // Les jour d'ouverture -> dispo
+
+        $manager->persist($lHambourgeois);
+        // J'ajoute les images
+        $lHambourgeoisArrayImages = ['1.jpg', '2.jpg', '3.jpg', '4.jpg'];
+        foreach ($lHambourgeoisArrayImages as $imageUrl){
+            $imageForBdd = new ImagesRestaurants();
+            $imageForBdd->setUrl($imageUrl);
+            $imageForBdd->setIdEtablissement($lHambourgeois);
+            $manager->persist($imageForBdd);
+        }
+
         $manager->flush();
     }
 

@@ -31,7 +31,7 @@ class Reservation
     private $nom;
 
     /**
-     * @ORM\Column(type="string", length=15)
+     * @ORM\Column(type="string", length=20)
      * @Assert\NotBlank(message="Le numéro de téléphone doit être renseigné")
      */
     private $num_tel;

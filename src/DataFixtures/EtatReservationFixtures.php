@@ -14,6 +14,7 @@ class EtatReservationFixtures extends Fixture
         foreach ($allEtat as $etat){
             $er = new EtatReservation();
             $er->setLibelle($etat);
+            $this->addReference('etat-'.$etat, $er);
             $manager->persist($er);
         }
 
