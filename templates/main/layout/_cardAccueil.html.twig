@@ -1,7 +1,7 @@
 <div class="card">
     <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
         <img
-                src="{{'images/restaurants/'~resto.slugFolderImage~'/'~ resto.imagesRestaurants[0].url }}"
+                src="{{asset('images/restaurants/'~resto.slugFolderImage~'/'~ resto.imagesRestaurants[0].url) }}"
         />
         <a href="#">
             <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
@@ -25,7 +25,7 @@
             <small>{{ resto.rue }} {{ resto.codePostal }} {{ resto.ville }}  </small>
         </p>
         <div class="d-grid gap-2">
-            <a href="{{path('reservations', {id: resto.id})}}" class="btn btn-success">RÉSERVEZ</a>
+            <a href="{{path('reservations', {id: resto.id})}}" class="btn btn-success">{{'static.cardRestaurant.reserver'|trans}}</a>
         </div>
     </div>
 </div>

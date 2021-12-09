@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil{% endblock %}
+{% block title %}{{ 'static.navbar.accueil'|trans }}{% endblock %}
 
 {% block body %}
 
 <div class="container py-4">
-    <h2 class="text-danger text-center">Trouvez votre bonheur parmis les {{ pagination.getTotalItemCount }} restaurants disponible</h2>
+    <h2 class="text-danger text-center">{{ 'static.bodyAccueil.title'|trans({'countResto': pagination.getTotalItemCount}) }}</h2>
     <div class="row" id="card-accueil">
         {% for resto in pagination %}
             <div class="col-12 col-md-6 col-lg-4 mt-2">

@@ -22,14 +22,14 @@
                 <div class="d-flex">
                     <i class="fas fa-map-marker-alt text-danger mt-1"></i>
                     <p class="ms-2">{{ resto.numRue }} {{ resto.rue }} {{ resto.codePostal }} {{ resto.ville }} </p>
-                    <a href="#" class="text-success ms-3">VOIR LE PLAN</a>
+                    <a href="https://maps.google.com/maps?q={{ resto.numRue }}+{{ resto.rue }},+{{ resto.codePostal }} + {{ resto.ville }}" class="text-success ms-3">{{ 'static.stepperReservation.presentationResto.voirPlan'|trans }}</a>
                 </div>
                 <p>
                     <i class="fas fa-phone-alt text-danger me-2"></i>
                     <a href="tel:+33625354587">{{ resto.numTelephone }}</a>
                 </p>
                 <div class="d-grid gap-2">
-                    <a href="{{asset( 'images/restaurants/'~resto.slugFolderImage~'/'~resto.slugMenu) }}" class="btn btn-success" target="_blank">VOIR LE MENU</a>
+                    <a href="{{asset( 'images/restaurants/'~resto.slugFolderImage~'/'~resto.slugMenu) }}" class="btn btn-success" target="_blank">{{ 'static.stepperReservation.presentationResto.voirMenu'|trans }}</a>
                 </div>
             </div>
 

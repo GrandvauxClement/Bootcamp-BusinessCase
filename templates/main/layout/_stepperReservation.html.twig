@@ -1,7 +1,7 @@
 <div class="container py-5">
     <div class="border border-danger bg-orange-lighter py-2 px-3 w-lg-50 w-75 mx-auto mt-5">
-        <h2 class="text-danger">Réservez une table</h2>
-        <small>Service gratuit - Réservation confirmée rapidement</small>
+        <h2 class="text-danger">{{ 'static.stepperReservation.title'|trans }}</h2>
+        <small>{{ 'static.stepperReservation.subtitle'|trans }}</small>
     </div>
     <div class="row justify-content-center">
         <!-- Vertical Steppers -->
@@ -13,7 +13,7 @@
                     <!-- SECTION 1 -->
                     <h4></h4>
                     <section>
-                        <h3>Sélectionnez une date</h3>
+                        <h3>{{ 'static.stepperReservation.dateTitle'|trans }}</h3>
 {#                        <div class="form-holder">#}
 {#                            <i class="far fa-calendar-alt"></i>#}
 {#                            <input type="date" class="form-control" placeholder="Sélectionnez une date" required>#}
@@ -24,7 +24,7 @@
                     <!-- SECTION 2 -->
                     <h4></h4>
                     <section>
-                        <h3>Horaires disponibles</h3>
+                        <h3>{{ 'static.stepperReservation.hourTitle'|trans }}</h3>
                         {{ form_row(form.stock_heure_arrive) }}
 {#                        <select class="form-select" aria-label="Default select example">#}
 {#                            <option selected>Choisir un horraire disponible</option>#}
@@ -41,14 +41,14 @@
                     <!-- SECTION 3 -->
                     <h4></h4>
                     <section>
-                        <h3 style="margin-bottom: 16px;">Nombre de personnes concerné</h3>
+                        <h3 style="margin-bottom: 16px;">{{ 'static.stepperReservation.nbrePersTitle'|trans }}</h3>
                         {{ form_row(form.nbre_place) }}
                     </section>
 
                     <!-- SECTION 4 -->
                     <h4></h4>
                     <section>
-                        <h3>Informations complémentaire</h3>
+                        <h3>{{ 'static.stepperReservation.infoCompTitle'|trans }}</h3>
                         <div class="form-row d-flex justify-content-around ">
                             {{ form_row(form.nom) }}
                             {{ form_row(form.prenom) }}

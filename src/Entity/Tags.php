@@ -7,12 +7,14 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Translatable\Translatable;
 
 
 /**
  * @ORM\Entity(repositoryClass=TagsRepository::class)
  */
-class Tags
+class Tags implements Translatable
 {
     /**
      * @ORM\Id
@@ -22,6 +24,7 @@ class Tags
     private $id;
 
     /**
+     * @Gedmo\Translatable
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Le nom doit être renseigné")
      * @Assert\Unique(message="Ce nom existe déjà choisis en un autre !")
@@ -32,6 +35,13 @@ class Tags
      * @ORM\ManyToMany(targetEntity=Etablissement::class, mappedBy="tags")
      */
     private $etablissements;
+
+    /**
+     * @Gedmo\Locale
+     * Used locale to override Translation listener`s locale
+     * this is not a mapped field of entity metadata, just a simple property
+     */
+    private $locale;
 
     public function __construct()
     {
@@ -85,5 +95,10 @@ class Tags
     public function __toString()
     {
         return $this->nom;
+    }
+
+    public function setTranslatableLocale($locale)
+    {
+        $this->locale = $locale;
     }
 }

@@ -29,7 +29,7 @@
             <!-- Left links -->
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link text-light" href="{{path('accueil')}}">Accueil</a>
+                    <a class="nav-link text-light" href="{{path('accueil')}}">{{ 'static.navbar.accueil'|trans }}</a>
                 </li>
                 {% if app.user %}
                     <li class="nav-item">
@@ -47,8 +47,44 @@
                         <a class="nav-link active" aria-current="page" href="{{path('app_register')}}">S'enregistrer</a>
                     </li>
                 {% endif %}
-            </ul>
-            <!-- Left links -->
+
+           </ul>
+
+            <button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
+                {% if app.request.locale|split('_')[0] is same as ('en')  %}
+                    <i class="united kingdom flag"></i>
+                {% else %}
+                    <i class="france flag"></i>
+                {% endif %}
+            </button>
+
+            <!-- Modal -->
+            <div
+                    class="modal fade"
+                    id="exampleModal"
+                    tabindex="-1"
+                    aria-labelledby="exampleModalLabel"
+                    aria-hidden="true"
+            >
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header bg-success text-white">
+                            <h5 class="modal-title" id="exampleModalLabel">{{ 'static.navbar.chooseLanguage.title'|trans }}</h5>
+                            <button
+                                    type="button"
+                                    class="btn-close"
+                                    data-mdb-dismiss="modal"
+                                    aria-label="Close"
+                            ></button>
+                        </div>
+                        <div class="modal-body">
+                            <a href="{{ path('setLangueActive',{lang: 'fr'}) }}" class="btn btn-light"><i class="france flag"></i> {{ 'static.navbar.chooseLanguage.fr'|trans }}</a>
+                            <a href="{{ path('setLangueActive',{lang: 'en'}) }}" class="btn btn-light"> <i class="united kingdom flag"></i> {{ 'static.navbar.chooseLanguage.en'|trans }}</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
         </div>
        
     </div>

@@ -30,7 +30,7 @@ class ReservationType extends AbstractType
         $builder
             ->add('dateReservation', DateType::class, [
                 'widget' => 'single_text',
-
+                'label'=>false,
                 'html5' => false,
                 'attr' => ['class' => 'js-datepicker bg-white text-black']
             ])
@@ -65,18 +65,18 @@ class ReservationType extends AbstractType
                 'label'=>false
             ])
             ->add('nom', TextType::class, [
-                'label'=>'Veuillez saisir votre nom',
+                'label'=>'static.formReservation.nom.label',
                 'attr' => ['class' => 'bg-white text-black',
-                    'placeholder'=>'Votre nom']
+                    'placeholder'=>'static.formReservation.nom.placeholder']
             ])
             ->add('prenom', TextType::class, [
-                'label'=>'Veuillez saisir votre prénom',
-                'attr' => ['class' => 'bg-white text-black','placeholder'=>'Votre prénom']
+                'label'=>'static.formReservation.prenom.label',
+                'attr' => ['class' => 'bg-white text-black','placeholder'=>'static.formReservation.prenom.placeholder']
             ])
             ->add('num_tel', TelType::class, [
-                'label'=>'Veuillez saisir votre numéro de téléphone',
+                'label'=>'static.formReservation.numTel.label',
                 'attr' => ['class' => 'bg-white text-black',
-                    'placeholder'=>'Votre numéro de téléphone']
+                    'placeholder'=>'static.formReservation.numTel.placeholder']
             ])
 //            ->add('save', SubmitType::class, [
 //
@@ -89,6 +89,7 @@ class ReservationType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Reservation::class,
+            'translation_domain' => 'messages'
         ]);
     }
 }

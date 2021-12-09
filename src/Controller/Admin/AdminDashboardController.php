@@ -32,7 +32,7 @@ class AdminDashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('<div class="d-flex align-items-center justify-content-around"> <img src="images/logo/logo.png" class="img-fluid" style="max-height: 50px"><span class="text-danger mt-1">Dashboard</span></div>')
+            ->setTitle('<div class="d-flex align-items-center justify-content-around"> <img src="../images/logo/logo.png" class="img-fluid" style="max-height: 50px"><span class="text-danger mt-1">Dashboard</span></div>')
             ;
     }
 

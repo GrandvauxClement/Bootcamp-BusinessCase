@@ -11,3 +11,17 @@
 .pagination {
   justify-content: center;
 }
+.ui-selectmenu-menu .ui-menu.customicons .ui-menu-item-wrapper {
+  padding: 0.5em 0 0.5em 3em;
+}
+.ui-selectmenu-menu .ui-menu.customicons .ui-menu-item .ui-icon {
+  height: 24px;
+  width: 24px;
+  top: 0.1em;
+}
+.ui-icon.fr{
+  background: url("../../../public/images/logo/fr.jpg") 0 0 no-repeat;
+}
+.ui-icon.en{
+  background: url("../../../public/images/logo/en.jpg") 0 0 no-repeat;
+}

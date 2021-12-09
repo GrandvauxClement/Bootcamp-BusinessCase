@@ -28,7 +28,6 @@ class ReservationFixtures extends Fixture implements DependentFixtureInterface
             $this->getReference('etat-refuser'), $this->getReference('etat-en attente'),
             $this->getReference('etat-accepter')
         ];
-
         for ($i=0; $i<200; $i++ ){
             $randResto = $restaurants[array_rand($restaurants,1 )];
 

@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 class MainController extends AbstractController
 {
     /**
@@ -35,6 +36,27 @@ class MainController extends AbstractController
             'pagination' => $pagination,
             'restos'=>$restos
         ]);
+    }
+
+    /**
+     * @Route("/set-language/{lang}", name="setLangueActive")
+     */
+    public function setLanguage($lang, Request $request): Response
+    {
+        $request->setLocale($lang);
+
+        $referer = $request->headers->get('referer');
+        $host = $request->headers->get('host');
+        $routeToRedirect = explode($host,$referer);
+        if ($lang === 'en'){
+            return $this->redirect($routeToRedirect[0].$host.'/en'.$routeToRedirect[1]);
+        } else {
+            if (str_contains($routeToRedirect[1],'/en/')){
+                $routeWithoutCountry = explode('/en/',$routeToRedirect[1]);
+                return $this->redirect($routeToRedirect[0].$host.'/'.$routeWithoutCountry[1]);
+            }
+            return $this->redirect('/');
+        }
     }
     
     /**

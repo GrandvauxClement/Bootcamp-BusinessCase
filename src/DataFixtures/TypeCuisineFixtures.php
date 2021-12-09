@@ -10,13 +10,17 @@ class TypeCuisineFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        $allTypesCuisine = ['Africaine', 'Algérienne', 'Allemande', 'Americaine', 'Argentine', 'Asiatique', 'Belge',
-            'Cajun & Créole', 'Canadienne', 'Espagnole', 'Française', 'Indienne', 'Italienne', 'Japonaise', 'Marocaine', 'Mexicaine', 'Turque'];
+        $allTypesCuisine = ['Africaine'=>'African', 'Algérienne'=>'Algerian', 'Allemande'=>'German', 'Americaine'=>'American',
+            'Asiatique'=>'Asian', 'Belge'=>'Belgian', 'Cajun & Créole'=>'Cajun & Créole', 'Canadienne'=>'Canadian',
+            'Espagnole'=>'Spanish', 'Française'=>'French', 'Indienne'=>'Indian', 'Italienne'=>'Italian',
+            'Japonaise'=>'Japanese', 'Marocaine'=>'Moroccan', 'Mexicaine'=>'Mexican', 'Turque'=>'Turkish'];
+        $repoTranslate = $manager->getRepository('Gedmo\\Translatable\\Entity\\Translation');
 
-        foreach ($allTypesCuisine as $type){
+        foreach ($allTypesCuisine as $typeFr => $typeEn){
             $tc = new TypeCuisine();
-            $tc->setNom($type);
-            $this->addReference('type'.$type, $tc);
+            $tc->setNom($typeFr);
+            $repoTranslate->translate($tc,'nom','en', $typeEn);
+            $this->addReference('type'.$typeFr, $tc);
             $manager->persist($tc);
         }
 

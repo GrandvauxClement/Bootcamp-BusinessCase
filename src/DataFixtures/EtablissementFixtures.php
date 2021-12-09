@@ -7,6 +7,7 @@ use App\Entity\ImagesRestaurants;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
+use Faker\Factory;
 
 class EtablissementFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -14,7 +15,6 @@ class EtablissementFixtures extends Fixture implements DependentFixtureInterface
     {
         // $product = new Product();
         // $manager->persist($product);
-
         // Dabord les info de l'établissement -- 1ER ETABLISSEMENT
         $leMadras = new Etablissement();
         $leMadras->setNom('Le Madras');

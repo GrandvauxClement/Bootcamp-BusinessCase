@@ -1,0 +1,46 @@
+static:
+  navbar:
+    accueil: "Accueil"
+    chooseLanguage:
+      title: "Sélectionnez votre langue"
+      fr: "FRANÇAIS"
+      en: "ANGLAIS"
+      de: "ALLEMAND"
+      es: "ESPAGNOL"
+      ja: "JAPONAIS"
+  header:
+    title: "Découvrez et réservez le meilleur restaurant"
+    form:
+      nameResto: "Nom du restaurant"
+      codePostal: "Code Postal"
+      typeCuisine: "Type de cuisine"
+      submit: "Recherchez"
+  bodyAccueil:
+    title: "Trouvez votre bonheur parmis les {countResto} restaurants disponible"
+  cardRestaurant:
+    reserver: "RÉSERVEZ"
+  footer:
+    cgu: "CGU"
+    cgv: "CGV"
+    mentionLegale: "mentions légales"
+    politique: "politique de confidentialité"
+  stepperReservation:
+    presentationResto:
+      voirPlan: "VOIR LE PLAN"
+      voirMenu: "VOIR LE MENU"
+    title: "Réservez une table"
+    subtitle: "Service gratuit - Réservation confirmée rapidement"
+    dateTitle: "Sélectionnez une date"
+    hourTitle: "Horaires disponibles"
+    nbrePersTitle: "Nombre de personnes concerné"
+    infoCompTitle: "Informations complémentaire"
+  formReservation:
+    nom:
+      label: "Veuillez saisir votre nom"
+      placeholder: "Votre nom"
+    prenom:
+      label: "Veuillez saisir votre prénom"
+      placeholder: "Votre prénom"
+    numTel:
+      label: "Veuillez saisir votre numéro de téléphone"
+      placeholder: "Votre numéro de téléphone"

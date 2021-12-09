@@ -1,0 +1,46 @@
+static:
+  navbar:
+    accueil: "Home"
+    chooseLanguage:
+      title: "Select your language"
+      fr: "FRENCH"
+      en: "ENGLISH"
+      de: "GERMAN"
+      es: "SPANISH"
+      ja: "JAPANESE"
+  header:
+    title: "Discover and book the best restaurant"
+    form:
+      nameResto: "Restaurant name"
+      codePostal: "Postal Code"
+      typeCuisine: "Kind of Kitchen"
+      submit: "Search"
+  bodyAccueil:
+    title: "Find your happiness among the {countResto} restaurants available"
+  cardRestaurant:
+    reserver: "BOOK"
+  footer:
+    cgu: "CGU"
+    cgv: "CGV"
+    mentionLegale: "Legal Notice"
+    politique: "privacy policy"
+  stepperReservation:
+    presentationResto:
+      voirPlan: "SEE THE PLAN"
+      voirMenu: "SEE THE MENU"
+    title: "Book a table"
+    subtitle: "Free service - Reservation confirmed quickly"
+    dateTitle: "Select a date"
+    hourTitle: "Available times"
+    nbrePersTitle: "Number of people involved"
+    infoCompTitle: "Free information"
+  formReservation:
+    nom:
+      label: "Please enter your last name"
+      placeholder: "Your last name"
+    prenom:
+      label: "Please enter your first name"
+      placeholder: "Your first name"
+    numTel:
+      label: "Please enter your phone number"
+      placeholder: "Your phone number"
