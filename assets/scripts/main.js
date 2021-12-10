@@ -4,3 +4,4 @@ import './jquery.steps';
 import "mdb-ui-kit";
 import './bootstrap-datepicker.min';
 import "./stepper";
+import "./searchBar";

@@ -19,22 +19,38 @@ class EtablissementRepository extends ServiceEntityRepository
         parent::__construct($registry, Etablissement::class);
     }
 
-    // /**
-    //  * @return Etablissement[] Returns an array of Etablissement objects
-    //  */
-    /*
-    public function findByExampleField($value)
+     /**
+      * @return Etablissement[] Returns an array of Etablissement objects
+     */
+
+    public function getRestoWhitoutTypeCuisine($nom, $codePostal)
     {
         return $this->createQueryBuilder('e')
-            ->andWhere('e.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('e.id', 'ASC')
-            ->setMaxResults(10)
+            ->andWhere('e.nom LIKE :val')
+            ->andWhere('e.code_postal LIKE :cp')
+            ->setParameter('val', '%'.$nom.'%')
+            ->setParameter('cp',$codePostal.'%')
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+    /**
+     * @return Etablissement[] Returns an array of Etablissement objects
+     */
+
+    public function getRestoWithTypeCuisine($nom, $codePostal, $tc)
+    {
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.id_type_cuisine = :val')
+            ->andWhere('e.nom LIKE :nom')
+            ->andWhere('e.code_postal LIKE :cp')
+            ->setParameter('val', $tc)
+            ->setParameter('nom', '%'.$nom.'%')
+            ->setParameter('cp',$codePostal.'%')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 
     /*
     public function findOneBySomeField($value): ?Etablissement

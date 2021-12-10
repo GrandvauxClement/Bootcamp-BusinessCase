@@ -16,8 +16,14 @@
                                     <input type="text" class="form-control fa" id="code_postal" placeholder="&#xf3c5; {{ 'static.header.form.codePostal'|trans }}">
                                 </div>
                                 <div class="col-auto p-2">
+                                    <select class="form-select" name="typeCuisine" id="typeCuisine">
+                                        <option selected value="">{{ 'static.header.form.typeCuisine'|trans }}</option>
+                                        {% for typeCuisine in allTypeCuisine %}
+                                            <option value="{{ typeCuisine }}">{{ typeCuisine }}</option>
+                                        {% endfor %}
+                                    </select>
 
-                                    <input type="text" class="form-control fa" id="type_cuisine" placeholder="&#xf562; {{ 'static.header.form.typeCuisine'|trans }}">
+{#                                    <input type="text" class="form-control fa" id="type_cuisine" placeholder="&#xf562; {{ 'static.header.form.typeCuisine'|trans }}">#}
                                 </div>
                                 <div class="col p-2">
                                     <button class="btn btn-block btn-success" type="submit">

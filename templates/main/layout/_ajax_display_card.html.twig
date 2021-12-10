@@ -1,10 +1,4 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}{{ 'static.navbar.accueil'|trans }}{% endblock %}
-
-{% block body %}
-
-<div class="container py-4" id="displayCardContent">
+<div class="container py-4">
     <h2 class="text-danger text-center">{{ 'static.bodyAccueil.title'|trans({'countResto': pagination.getTotalItemCount}) }}</h2>
     <div class="row" id="card-accueil">
         {% for resto in pagination %}
@@ -19,4 +13,3 @@
         {{ knp_pagination_render(pagination) }}
     </div>
 </div>
-{% endblock %}

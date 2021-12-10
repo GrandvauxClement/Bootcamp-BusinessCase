@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\RelationRestoJourDispo;
 use App\Entity\Reservation;
+use App\Entity\TypeCuisine;
 use App\Form\ReservationType;
 use App\Repository\EtablissementRepository;
 use App\Repository\EtatReservationRepository;
@@ -25,16 +26,37 @@ class MainController extends AbstractController
      */
     public function index(EtablissementRepository $etablissementRepository, PaginatorInterface $paginator, Request $request): Response
     {
+        $allTypeCuisine = $this->getDoctrine()->getRepository(TypeCuisine::class)->findAll();
+        $nom = (empty($request->get('nom')) ? '' : $request->get('nom'));
+        $cp = (empty($request->get('cp')) ? '' : $request->get('cp'));
+        $typeCusine = $request->get('typeCuisine');
+        if (empty($nom) && empty($cp) && empty($typeCusine)){
+            $restos = $etablissementRepository->findAll();
+        }else {
+            if (empty($typeCusine)){
+                $restos = $etablissementRepository->getRestoWhitoutTypeCuisine($nom,$cp);
+            }else{
+                $dbTypeCuisine = $this->getDoctrine()->getRepository(TypeCuisine::class)->findOneBy(['nom'=>$typeCusine]);
+                $restos = $etablissementRepository->getRestoWithTypeCuisine($nom, $cp, $dbTypeCuisine->getId());
+            }
+        }
 
-        $restos = $etablissementRepository->findAll();
         $pagination = $paginator->paginate(
             $restos,
             $request->query->getInt('page', 1),
             6
         );
+        if ($request->isXmlHttpRequest()){
+            return $this->render('main/layout/_ajax_display_card.html.twig', [
+                'pagination' => $pagination,
+                'restos'=>$restos,
+                'allTypeCuisine'=>$allTypeCuisine
+            ]);
+        }
         return $this->render('main/index.html.twig', [
             'pagination' => $pagination,
-            'restos'=>$restos
+            'restos'=>$restos,
+            'allTypeCuisine'=>$allTypeCuisine
         ]);
     }
 
@@ -74,6 +96,7 @@ class MainController extends AbstractController
      */
     public function reservations($id, EtablissementRepository $etablissementRepository, EtatReservationRepository $etatReservationRepository, Request $request)
     {
+        $allTypeCuisine = $this->getDoctrine()->getRepository(TypeCuisine::class)->findAll();
         $resto = $etablissementRepository->find($id);
         $form = $this->createForm(ReservationType::class, new Reservation($resto));
         $form->handleRequest($request);
@@ -92,6 +115,7 @@ class MainController extends AbstractController
         return $this->render('main/reservation.html.twig',[
             'resto'=> $resto,
             'form' => $form->createView(),
+            'allTypeCuisine'=>$allTypeCuisine
         ]);
     }
 
